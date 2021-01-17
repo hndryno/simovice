@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                List Perusahaan
+                List Perusahaan2 asodjalksdjl
             </h2>
         </template>
 
@@ -32,20 +32,38 @@
                                                 Nama Perusahaan
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Dibuat Oleh
+                                                Pic
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Tanggal Dibuat
+                                                Telepon
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Tanggal Diedit
+                                                Email
+                                            </th>
+                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Harga VO
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Tanggal Aggrement
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Tanggal Selesai
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Fasilitas Meeting Room
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Fasilitas Konsultasi Pajak
+                                            </th>
+                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Fasilitas Private Office
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Aksi
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200" v-if="companies.length > 0">
+                                    <tbody class="bg-white divide-y divide-gray-200">
                                         <tr v-for="c in companies" :key="c.id">
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
@@ -86,19 +104,6 @@
                                         </tr>
                                         <!-- More items... -->
                                     </tbody>
-
-                                    <tbody class="bg-white divide-y divide-gray-200" v-if="companies.length == 0">
-                                        <tr>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap" colspan="4">
-                                                Data kosong
-                                                <!-- <div class="flex items-center">
-                                                    <div class="text-center md:text-center">Data Kosong</div>
-                                                </div> -->
-                                            </td>
-                                        </tr>
-                                        <!-- More items... -->
-                                    </tbody>
-
                                     </table>
                                 </div>
                                 </div>
@@ -193,8 +198,6 @@
             async addCompany(){
                 const res = await axios.post('api/company', this.company)
 
-                console.log(res)
-
                 if(res.status == 201){
                     Toast.fire({
                         icon: 'Success',
@@ -247,7 +250,6 @@
                 });
             },
             async getCompany(){
-                console.log(this.companies.length)
                 await axios.get('api/company', this.company)
                 .then((res) => {
                     this.companies = res.data

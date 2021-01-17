@@ -31,3 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/company', function () {
     return Inertia::render('Addition/Company');
 })->name('company');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/virtualOffice', function () {
+    return Inertia::render('Addition/VirtualOffice');
+})->name('virtualOffice');

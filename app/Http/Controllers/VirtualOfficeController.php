@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
 
-class CompanyController extends Controller
+class VirtualOfficeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        //
     }
 
     /**
@@ -26,19 +24,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = Auth::guard('api')->user(); 
-        
-        $this->validate($request, [
-            'nama_perusahaan' => 'required'
-        ]);
-
-        $company = new Company();
-        $company->nama_perusahaan = $request->nama_perusahaan;
-        // $company->created_by = $user->id; 
-
-        $company->save();
-
-        return response('Data perusahaan baru berhasil ditambahkan', 201);
+        //
     }
 
     /**
@@ -49,7 +35,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        return Company::find($id);
+        //
     }
 
     /**
@@ -61,16 +47,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'nama_perusahaan' => 'required'
-        ]);
-
-        $company = Company::find($id);
-        $company->nama_perusahaan = $request->nama_perusahaan;
-
-        $company->save();
-
-        return response('Data perusahaan berhasil diupdate', 200);
+        //
     }
 
     /**
@@ -81,7 +58,6 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        Company::find($id)->delete();
-        return response('Data perusahaan berhasil dihapus', 200);
+        //
     }
 }
