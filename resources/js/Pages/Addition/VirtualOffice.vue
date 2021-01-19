@@ -148,7 +148,7 @@
                                                     </button>
                                                     <button
                                                         class="btn btn-danger waves-effect waves-light"
-                                                        @click="deleteCompany(c.id)"
+                                                        @click="deletevirtualOffice(c.id)"
                                                     >
                                                         <font-awesome-icon :icon="['fas', 'trash']" />
                                                     </button>
