@@ -25,6 +25,7 @@
         "sass": "^1.32.4",
         "sass-loader": "^8.0.2",
         "tailwindcss": "^2.0.1",
+        "vselect-component": "^1.0.2",
         "vue": "^2.5.17",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.10"

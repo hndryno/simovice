@@ -30,7 +30,7 @@
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('virtualOffice')" :active="route().current('virtualOffice')">
-                                    List Perusahaan2
+                                     List Virtual Office
                                 </jet-nav-link>
                             </div>
                         </div>

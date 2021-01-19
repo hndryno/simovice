@@ -19,3 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('company', 'App\Http\Controllers\CompanyController');
+
+Route::apiResource('virtual-office', 'App\Http\Controllers\VirtualOfficeController');

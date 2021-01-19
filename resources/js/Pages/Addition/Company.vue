@@ -53,8 +53,7 @@
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                                <div class="text-sm text-gray-500">Optimization</div>
+                                                {{ $page.props.user.current_team }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <!-- <div class="text-sm text-gray-900">{{c.created_at}}</div> -->
@@ -91,9 +90,6 @@
                                         <tr>
                                             <td class="text-center px-6 py-4 whitespace-nowrap" colspan="4">
                                                 Data kosong
-                                                <!-- <div class="flex items-center">
-                                                    <div class="text-center md:text-center">Data Kosong</div>
-                                                </div> -->
                                             </td>
                                         </tr>
                                         <!-- More items... -->
@@ -108,17 +104,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- <template #footer> -->
-
-            <!-- <div class="align-center">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCompany">
-                        Tambah Data Perusahaan
-                    </button>
-            </div> -->
-
+<!-- modal -->
            <div class="modal fade" id="addCompany" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -157,8 +145,7 @@
                 </div>
             </div>
 
-        <!-- </template> -->
-   
+<!-- end modal -->
     </app-layout>
 
     

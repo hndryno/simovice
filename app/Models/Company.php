@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+    
+    protected $table = 'companies';
+
+    protected $fillable = ['nama_perusahaan'];
+
+    public function virtualOffice()
+    {
+        return $this->hasMany('App\Models\VirtualOffice');
+    }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;  
 
 class CompanyController extends Controller
 {
@@ -15,7 +17,33 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        try{
+            $company = Company::all();
+
+            return $company;
+
+        }catch(ModelNotFoundException $exception){
+
+            return back()->withError($exception->getMessage())->withInput();
+
+        }
+        
+
+        // try{
+        //     $company = Company::all();
+
+        //     return response()->json([
+        //         status => 'Success',
+        //         message => 'Data berhasil ditampilkan',
+        //         data => $company
+        //     ], 200);
+        // }catch(ModelNotFoundException $exception){
+        //     return response()->json([
+        //         status => 'Error',
+        //         message => $e,
+        //     ], 400);
+
+        // }
     }
 
     /**
@@ -25,16 +53,13 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // $user = Auth::guard('api')->user(); 
-        
+    {   
         $this->validate($request, [
             'nama_perusahaan' => 'required'
         ]);
 
         $company = new Company();
         $company->nama_perusahaan = $request->nama_perusahaan;
-        // $company->created_by = $user->id; 
 
         $company->save();
 

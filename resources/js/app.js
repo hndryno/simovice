@@ -9,6 +9,12 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Form, HasError, AlertError } from "vform";
+// import Vselect from 'vue-select2'
+// import {AutoCompletePlugin} from '@syncfusion/ej2-vue-dropdowns'
+import vSelect from 'vselect-component'
+
+Vue.use(vSelect)
+
 
 library.add(fas)
 
@@ -18,6 +24,7 @@ Vue.mixin({ methods: { route } });
 Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
 Vue.use(Vue2Filters)
+// Vue.use(AutoCompletePlugin)
 
 window.Form = Form;
 Vue.component(HasError.name, HasError);
