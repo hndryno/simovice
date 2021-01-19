@@ -72,7 +72,7 @@ class VirtualOfficeController extends Controller
             'pic' => 'required'
         ]);
 
-        $vo = new VirtualOffice();
+        $vo = VirtualOffice::find($id);
         $vo->company_id = $request->company_id;
         $vo->pic = $request->pic;
         $vo->telepon = $request->telepon;
