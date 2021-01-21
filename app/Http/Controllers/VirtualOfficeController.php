@@ -14,7 +14,7 @@ class VirtualOfficeController extends Controller
      */
     public function index()
     {
-        return VirtualOffice::with('company:id,nama_perusahaan')->get();
+        return VirtualOffice::with('company:id,nama_perusahaan,pic,email,telepon')->get();
     }
     /**
      * Store a newly created resource in storage.
@@ -31,9 +31,7 @@ class VirtualOfficeController extends Controller
 
         $vo = new VirtualOffice();
         $vo->company_id = $request->company_id;
-        $vo->pic = $request->pic;
-        $vo->email = $request->email;
-        $vo->telepon = $request->telepon;
+        $vo->kode_vo = $request->kode_vo;
         $vo->harga_vo = $request->harga_vo;
         $vo->tanggal_aggrement = $request->tanggal_aggrement;
         $vo->tanggal_selesai = $request->tanggal_selesai;
@@ -74,9 +72,6 @@ class VirtualOfficeController extends Controller
 
         $vo = new VirtualOffice();
         $vo->company_id = $request->company_id;
-        $vo->pic = $request->pic;
-        $vo->telepon = $request->telepon;
-        $vo->email = $request->email;
         $vo->harga_vo = $request->harga_vo;
         $vo->tanggal_aggrement = $request->tanggal_aggrement;
         $vo->tanggal_selesai = $request->tanggal_selesai;

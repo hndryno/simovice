@@ -60,6 +60,9 @@ class CompanyController extends Controller
 
         $company = new Company();
         $company->nama_perusahaan = $request->nama_perusahaan;
+        $company->pic = $request->pic;
+        $company->email = $request->email;
+        $company->telepon = $request->telepon;
 
         $company->save();
 
@@ -92,6 +95,9 @@ class CompanyController extends Controller
 
         $company = Company::find($id);
         $company->nama_perusahaan = $request->nama_perusahaan;
+        $company->pic = $request->pic;
+        $company->email = $request->email;
+        $company->telepon = $request->telepon;
 
         $company->save();
 

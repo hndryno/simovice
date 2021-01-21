@@ -24,13 +24,19 @@
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('company')" :active="route().current('company')">
-                                    List Perusahaan
+                                    Perusahaan
                                 </jet-nav-link>
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('virtualOffice')" :active="route().current('virtualOffice')">
-                                     List Virtual Office
+                                     Virtual Office
+                                </jet-nav-link>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('monitoring')" :active="route().current('monitoring')">
+                                     Monitoring
                                 </jet-nav-link>
                             </div>
                         </div>

@@ -9,12 +9,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Form, HasError, AlertError } from "vform";
+import moment from 'moment'
+
 // import Vselect from 'vue-select2'
 // import {AutoCompletePlugin} from '@syncfusion/ej2-vue-dropdowns'
 import vSelect from 'vselect-component'
 
 Vue.use(vSelect)
-
 
 library.add(fas)
 
@@ -52,3 +53,20 @@ new Vue({
             },
         }),
 }).$mount(app);
+
+Vue.mixin({
+  methods: {
+    convertUnixTS(date){
+      moment.locale("id");
+      return moment(date, "YYYY-MM-DD").format("D MMMM YYYY");
+    },
+    convertBoolean(bool){
+      if(bool == 1){
+        return 'Ya'
+      }else{
+        return 'Tidak'
+      }
+      // return moment(date, "YYYY-MM-DD").format("D MMMM YYYY");
+    },
+  }
+})

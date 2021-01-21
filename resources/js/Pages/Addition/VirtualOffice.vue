@@ -8,13 +8,23 @@
 
         <!-- <div class="container mx-auto px-4"> -->
             <div class="container">
-            <div class="py-12">
-                <div class="float-right md:mr-8">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addvirtualOffice" @click="tambahModal">
-                        Tambah Data
-                    </button>
+                <div class="py-12">
+                    <div class="float-right md:mr-8">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addvirtualOffice" @click="tambahModal">
+                            Tambah Data
+                        </button>
+                    </div>
+                    <div class="float-left ml-8">
+                        <div class="form-group">
+                            <input
+                                class="float-left form-control"
+                                type="text"
+                                v-model="search"
+                                placeholder="Cari Perusahaan"
+                                />
+                        </div>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="py-3">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -29,18 +39,15 @@
                                     <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                No
+                                            </th>
+                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Kode
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Nama Perusahaan
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Pic
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Telepon
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Email
-                                            </th>
-                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Harga VO
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -73,25 +80,20 @@
                                         </tr>
                                     </thead>
                                    <tbody class="bg-white divide-y divide-gray-200" v-if="virtualOffices.length > 0">
-                                        <tr v-for="c in virtualOffices" :key="c.id">
+                                        <tr v-for="(c, index) in virtualOffices" :key="c.id">
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                <div class="text-sm text-gray-900">{{index + 1}}</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                <div class="text-sm text-gray-900">{{c.kode_vo}}</div>
+                                                </div>
+                                            </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.company.nama_perusahaan}}</div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{c.pic}}</div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{c.telepon}}</div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{c.email}}</div>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -101,12 +103,12 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{c.tanggal_aggrement}}</div>
+                                                <div class="text-sm text-gray-900">{{convertUnixTS(c.tanggal_aggrement)}}</div>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{c.tanggal_selesai}}</div>
+                                                <div class="text-sm text-gray-900">{{convertUnixTS(c.tanggal_selesai)}}</div>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -126,7 +128,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{c.papan_nama_perusahaan}}</div>
+                                                <div class="text-sm text-gray-900">{{convertBoolean(c.papan_nama_perusahaan)}}</div>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -182,12 +184,6 @@
 
         <!-- <template #footer> -->
 
-            <!-- <div class="align-center">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addvirtualOffice">
-                        Tambah Data Perusahaan
-                    </button>
-            </div> -->
-
            <div class="modal fade" id="addvirtualOffice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -200,10 +196,6 @@
                     </div>
                     <div class="modal-body">
                         <form id="formvirtualOffice" @submit.prevent="editMode ? updatevirtualOffice() : addvirtualOffice()">
-                            <!-- <div class="form-group">
-                                <label for="company_id">Nama Perusahaan</label>
-                                <input type="text" v-model="virtualOffice.company_id" class="form-control" name="company_id" id="company_id" aria-describedby="helpId" placeholder="Masukan Nama Perusahaan ..">
-                            </div> -->
                             <div class="form-group">
                                 <label for>Pilih Perusahaan</label>
                                 <select
@@ -222,16 +214,8 @@
                                 </select>
                             </div>
                              <div class="form-group">
-                                <label for="pic">Pic</label>
-                                <input type="text" v-model="virtualOffice.pic" class="form-control" name="pic" id="pic" aria-describedby="helpId" placeholder="Masukan Pic ..">
-                            </div>
-                            <div class="form-group">
-                                <label for="telepon">Nomor Telepon</label>
-                                <input type="number" v-model="virtualOffice.telepon" class="form-control" name="telepon" id="telepon" aria-describedby="helpId" placeholder="Masukan Nomor Telepon ..">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" v-model="virtualOffice.email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Masukan email ..">
+                                <label for="kode_vo">Kode</label>
+                                <input type="text" v-model="virtualOffice.kode_vo" class="form-control" name="kode_vo" id="kode_vo" aria-describedby="helpId" placeholder="Masukan Harga Virtual Office ..">
                             </div>
                              <div class="form-group">
                                 <label for="harga_vo">Harga Virtual Office</label>
@@ -250,7 +234,7 @@
                                 <input type="text" v-model="virtualOffice.fasilitas_meeting_room" class="form-control" name="fasilitas_meeting_room" id="fasilitas_meeting_room" aria-describedby="helpId" placeholder="Masukan Fasilitas Meeting Room ..">
                             </div>
                             <div class="form-group">
-                                <label for="fasilitas_konsultasi_pajak">fasilitas_konsultasi_pajak</label>
+                                <label for="fasilitas_konsultasi_pajak">Fasilitas Konsultasi Pajak</label>
                                 <input type="text" v-model="virtualOffice.fasilitas_konsultasi_pajak" class="form-control" name="fasilitas_konsultasi_pajak" id="fasilitas_konsultasi_pajak" aria-describedby="helpId" placeholder="Masukan fasilitas_konsultasi_pajak ..">
                             </div>
                             <div class="form-group">
@@ -260,6 +244,11 @@
                             <div class="form-group">
                                 <label for="papan_nama_perusahaan">Papan Nama Perusahaan</label>
                                 <input type="text" v-model="virtualOffice.papan_nama_perusahaan" class="form-control" name="papan_nama_perusahaan" id="papan_nama_perusahaan" aria-describedby="helpId" placeholder="Masukan Papan Nama Perusahaan ..">
+                                <!-- <br>
+                                <input type="radio" id="yes" value="true" v-model="virtualOffice.papan_nama_perusahaan">
+                                <label for="yes">Iya</label>
+                                <input type="radio" id="no" value="false" v-model="virtualOffice.papan_nama_perusahaan">
+                                <label for="no">Tidak</label> -->
                             </div>
                              
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -293,7 +282,6 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import Welcome from '@/Jetstream/Welcome'
-    import moment from 'moment'
 
     export default {
         components: {
@@ -308,25 +296,20 @@
                 companies: [],
                 virtualOffice: new Form({
                     id: '',
+                    kode_vo: '',
                     company_id: '',
-                    pic: '',
-                    telepon: '',
-                    email: '',
                     harga_vo: '',
                     tanggal_aggrement: '',
                     tanggal_selesai: '',
                     fasilitas_meeting_room: '',
                     fasilitas_konsultasi_pajak: '',
                     fasilitas_private_office: '',
-                    papan_nama_perusahaan: ''
+                    papan_nama_perusahaan: null
                 }),
+                search: ""
             }
         },
         methods: {
-            convertUnixTS(date){
-                let data = moment.locale("id");
-                return moment(date, "YYYY-MM-DD").format("D MMMM YYYY");
-            },
             async addvirtualOffice(){
                 const res = await axios.post('api/virtual-office', this.virtualOffice)
 
@@ -418,6 +401,16 @@
             Fire.$on('addedvirtualOffice', () => {
                 this.getvirtualOffice()
             })
+        },
+         computed: {
+            FilteredVo: function() {
+                return this.virtualOffices.filter(virtualOffice => {
+                    console.log(virtualOffice)
+                    // return (
+                    //     virtualOffice.harga_vo.match(this.search)
+                    // );
+                });
+            }
         }
 }
 </script>

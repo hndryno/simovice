@@ -15,9 +15,8 @@ class CreateVirtualOfficesTable extends Migration
     {
         Schema::create('virtual_offices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('pic', 100);
-            $table->string('email', 100);
-            $table->bigInteger('telepon');
+            $table->unsignedInteger('company_id');
+            $table->string('kode_vo', 50)->unique();
             $table->bigInteger('harga_vo');
             $table->dateTime('tanggal_aggrement');
             $table->dateTime('tanggal_selesai');
@@ -27,7 +26,9 @@ class CreateVirtualOfficesTable extends Migration
             $table->boolean('papan_nama_perusahaan')->default(0);
             $table->timestamps();
 
-            $table->foreignId('company_id')->constrained();
+            // $table->foreignId('company_id')->constrained();
+
+            $table->foreign('company_id')->on('companies')->references('id')->onUpdate('cascade')->onDelete('cascade');
 
             // $table->foreign('company_id')->on('companies')->references('id')->onUpdate('cascade')->onDelete('cascade');
         });
