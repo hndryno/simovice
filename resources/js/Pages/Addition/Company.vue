@@ -32,7 +32,7 @@
 
             <div class="py-3">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    
+
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <!-- This example requires Tailwind CSS v2.0+ -->
                             <div class="flex flex-col">
@@ -194,7 +194,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        
+
                     </div>
                     </div>
                 </div>
@@ -203,7 +203,7 @@
 <!-- end modal -->
     </app-layout>
 
-    
+
 </template>
 
 <script>
@@ -238,7 +238,7 @@
 
                 if(res.status == 201){
                     Toast.fire({
-                        icon: 'Success',
+                        icon: 'success',
                         title: res.data
                     })
 
@@ -253,7 +253,7 @@
 
                 if(res.status == 200){
                     Toast.fire({
-                        icon: 'Success',
+                        icon: 'success',
                         title: res.data
                     })
 
