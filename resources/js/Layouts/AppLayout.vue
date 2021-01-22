@@ -161,6 +161,15 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('company')" :active="route().current('company')">
+                            Perusahaan
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('virtualOffice')" :active="route().current('virtualOffice')">
+                            Virtual Office
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('monitoring')" :active="route().current('monitoring')">
+                            Monitoring
+                        </jet-responsive-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
