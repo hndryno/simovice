@@ -11,14 +11,16 @@
             <div class="md:container md:mx-auto">
                 <div class="row">
                     <div class="col-md-6">
+                        <form @submit.prevent="searchVo">
                         <div class="input-group col-md-10">
-                            <input class="form-control" type="search" placeholder="Masukan Kode Virtual Office" id="example-search-input">
+                            <input class="form-control" type="search" placeholder="Masukan Kode Virtual Office" id="example-search-input" v-model="search">
                             <span class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="submit">
                                     Cari Data
                                 </button>
                             </span>
                         </div>
+                        </form>
 
                         <div class="py-5">
                             <div class="card">
@@ -26,12 +28,21 @@
                                     Data Perusahaan
                                 </div>
 
-                                <div class="card-body">
+                                <div class="card-body" v-if="company.hasOwnProperty('id')">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><b>Nama Perusahaan : </b></li>
-                                        <li class="list-group-item"><b>PIC : </b></li>
-                                        <li class="list-group-item"><b>Telepon : </b></li>
-                                        <li class="list-group-item"><b>Email : </b></li>
+                                        <li class="list-group-item"><b>Nama Perusahaan : </b>{{company.company.nama_perusahaan}}</li>
+                                        <li class="list-group-item"><b>PIC : </b>{{company.company.pic}} </li>
+                                        <li class="list-group-item"><b>Telepon :</b>{{company.company.telepon}} </li>
+                                        <li class="list-group-item"><b>Email : </b>{{company.company.email}} </li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body" v-else>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><b>Nama Perusahaan : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>PIC : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Telepon : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Email : </b>Data Kosong</li>
                                     </ul>
                                 </div>
                             </div>
@@ -47,15 +58,28 @@
                                     Virtual Office
                                 </div>
 
-                                <div class="card-body">
+                                <div class="card-body" v-if="company.hasOwnProperty('company')">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><b>Harga Vo : </b></li>
-                                        <li class="list-group-item"><b>Tanggal Aggrement : </b></li>
-                                        <li class="list-group-item"><b>Tanggal Selesai : </b></li>
-                                        <li class="list-group-item"><b>Fasilitas Meeting Room : </b></li>
-                                        <li class="list-group-item"><b>Fasilitas Konsultasi Pajak : </b></li>
-                                        <li class="list-group-item"><b>Fasilitas Private Office : </b></li>
-                                        <li class="list-group-item"><b>Papan Nama Perusahaan : </b></li>
+                                        <li class="list-group-item"><b>Harga Vo : {{company.harga_vo}} </b></li>
+                                        <li class="list-group-item"><b>Tanggal Aggrement : {{company.tanggal_aggrement}} </b></li>
+                                        <li class="list-group-item"><b>Tanggal Selesai : </b>{{company.tanggal_selesai}}</li>
+                                        <li class="list-group-item"><b>Fasilitas Meeting Room : </b>{{company.fasilitas_konsultasi_pajak}}</li>
+                                        <li class="list-group-item"><b>Fasilitas Konsultasi Pajak : </b>{{company.fasilitas_private_office}}</li>
+                                        <li class="list-group-item"><b>Fasilitas Private Office : </b>{{company.fasilitas_private_office}}</li>
+                                        <li class="list-group-item"><b>Papan Nama Perusahaan : </b>{{company.papan_nama_perusahaan}}</li>
+
+                                    </ul>
+                                </div>
+
+                                 <div class="card-body" v-else>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><b>Harga Vo : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Tanggal Aggrement : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Tanggal Selesai : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Fasilitas Meeting Room : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Fasilitas Konsultasi Pajak : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Fasilitas Private Office : </b>Data Kosong</li>
+                                        <li class="list-group-item"><b>Papan Nama Perusahaan : </b>Data Kosong</li>
 
                                     </ul>
                                 </div>
@@ -148,17 +172,22 @@
 
         data(){
             return{
-                editMode: false,
-                companies: [],
-                company: new Form({
-                    id: '',
-                    nama_perusahaan: '',
-                     pic: '',
-                    telepon: '',
-                    email: '',
-                }),
-                search: ""
+                company: {},
+                search: "",
             }
         },
+        methods:{
+            async searchVo() {
+                try{
+                    let param = `api/virtual-office/${this.search}`
+                    await axios.get(param).then(({ data }) => (this.company = data));
+                }catch(err){
+                    console.log(err)
+                }
+            },
+        },
+        created(){
+            // this.searchVo();
+        }
 }
 </script>

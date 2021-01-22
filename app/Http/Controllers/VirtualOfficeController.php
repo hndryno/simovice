@@ -53,7 +53,9 @@ class VirtualOfficeController extends Controller
      */
     public function show($id)
     {
-        return Company::find($id);
+        $VirtualOffice = VirtualOffice::where('kode_vo',$id)->with('company')->first();
+       
+        return $VirtualOffice;
     }
 
     /**

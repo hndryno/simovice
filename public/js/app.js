@@ -14056,8 +14056,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14200,22 +14232,52 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
-    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__.default
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__.default,
+    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_2__.default
   },
   data: function data() {
     return {
-      editMode: false,
-      companies: [],
-      company: new Form({
-        id: '',
-        nama_perusahaan: '',
-        pic: '',
-        telepon: '',
-        email: ''
-      }),
+      company: {},
       search: ""
     };
+  },
+  methods: {
+    searchVo: function searchVo() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var param;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                param = "api/virtual-office/".concat(_this.search);
+                _context.next = 4;
+                return axios.get(param).then(function (_ref) {
+                  var data = _ref.data;
+                  return _this.company = data;
+                });
+
+              case 4:
+                _context.next = 9;
+                break;
+
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 6]]);
+      }))();
+    }
+  },
+  created: function created() {// this.searchVo();
   }
 });
 
@@ -88898,31 +88960,61 @@ var render = function() {
         _c("div", { staticClass: "md:container md:mx-auto" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "input-group col-md-10" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "search",
-                    placeholder: "Masukan Kode Virtual Office",
-                    id: "example-search-input"
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.searchVo($event)
+                    }
                   }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                Cari Data\n                            "
+                },
+                [
+                  _c("div", { staticClass: "input-group col-md-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "search",
+                        placeholder: "Masukan Kode Virtual Office",
+                        id: "example-search-input"
+                      },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "input-group-append" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Cari Data\n                            "
+                          )
+                        ]
                       )
-                    ]
-                  )
-                ])
-              ]),
+                    ])
+                  ])
+                ]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "py-5" }, [
                 _c("div", { staticClass: "card" }, [
@@ -88932,25 +89024,63 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("ul", { staticClass: "list-group list-group-flush" }, [
-                      _c("li", { staticClass: "list-group-item" }, [
-                        _c("b", [_vm._v("Nama Perusahaan : ")])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "list-group-item" }, [
-                        _c("b", [_vm._v("PIC : ")])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "list-group-item" }, [
-                        _c("b", [_vm._v("Telepon : ")])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "list-group-item" }, [
-                        _c("b", [_vm._v("Email : ")])
+                  _vm.company.hasOwnProperty("id")
+                    ? _c("div", { staticClass: "card-body" }, [
+                        _c(
+                          "ul",
+                          { staticClass: "list-group list-group-flush" },
+                          [
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("Nama Perusahaan : ")]),
+                              _vm._v(
+                                _vm._s(_vm.company.company.nama_perusahaan)
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("PIC : ")]),
+                              _vm._v(_vm._s(_vm.company.company.pic) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("Telepon :")]),
+                              _vm._v(_vm._s(_vm.company.company.telepon) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("Email : ")]),
+                              _vm._v(_vm._s(_vm.company.company.email) + " ")
+                            ])
+                          ]
+                        )
                       ])
-                    ])
-                  ])
+                    : _c("div", { staticClass: "card-body" }, [
+                        _c(
+                          "ul",
+                          { staticClass: "list-group list-group-flush" },
+                          [
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("Nama Perusahaan : ")]),
+                              _vm._v("Data Kosong")
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("PIC : ")]),
+                              _vm._v("Data Kosong")
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("Telepon : ")]),
+                              _vm._v("Data Kosong")
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-group-item" }, [
+                              _c("b", [_vm._v("Email : ")]),
+                              _vm._v("Data Kosong")
+                            ])
+                          ]
+                        )
+                      ])
                 ])
               ])
             ]),
@@ -88963,37 +89093,91 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("ul", { staticClass: "list-group list-group-flush" }, [
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Harga Vo : ")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Tanggal Aggrement : ")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Tanggal Selesai : ")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Fasilitas Meeting Room : ")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Fasilitas Konsultasi Pajak : ")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Fasilitas Private Office : ")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Papan Nama Perusahaan : ")])
+                _vm.company.hasOwnProperty("company")
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c("ul", { staticClass: "list-group list-group-flush" }, [
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [
+                            _vm._v(
+                              "Harga Vo : " + _vm._s(_vm.company.harga_vo) + " "
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [
+                            _vm._v(
+                              "Tanggal Aggrement : " +
+                                _vm._s(_vm.company.tanggal_aggrement) +
+                                " "
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Tanggal Selesai : ")]),
+                          _vm._v(_vm._s(_vm.company.tanggal_selesai))
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Fasilitas Meeting Room : ")]),
+                          _vm._v(_vm._s(_vm.company.fasilitas_konsultasi_pajak))
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Fasilitas Konsultasi Pajak : ")]),
+                          _vm._v(_vm._s(_vm.company.fasilitas_private_office))
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Fasilitas Private Office : ")]),
+                          _vm._v(_vm._s(_vm.company.fasilitas_private_office))
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Papan Nama Perusahaan : ")]),
+                          _vm._v(_vm._s(_vm.company.papan_nama_perusahaan))
+                        ])
+                      ])
                     ])
-                  ])
-                ])
+                  : _c("div", { staticClass: "card-body" }, [
+                      _c("ul", { staticClass: "list-group list-group-flush" }, [
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Harga Vo : ")]),
+                          _vm._v("Data Kosong")
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Tanggal Aggrement : ")]),
+                          _vm._v("Data Kosong")
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Tanggal Selesai : ")]),
+                          _vm._v("Data Kosong")
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Fasilitas Meeting Room : ")]),
+                          _vm._v("Data Kosong")
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Fasilitas Konsultasi Pajak : ")]),
+                          _vm._v("Data Kosong")
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Fasilitas Private Office : ")]),
+                          _vm._v("Data Kosong")
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("b", [_vm._v("Papan Nama Perusahaan : ")]),
+                          _vm._v("Data Kosong")
+                        ])
+                      ])
+                    ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "py-4" }),

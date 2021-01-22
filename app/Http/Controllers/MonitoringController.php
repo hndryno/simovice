@@ -34,9 +34,19 @@ class MonitoringController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($kode)
     {
-        return VirtualOffice::find($id);
+        // return VirtualOffice::find($kode);
+       try{
+            $VirtualOffice = VirtualOffice::where('kode',$id);
+       
+            return $VirtualOffice;
+
+        }catch(ModelNotFoundException $exception){
+
+            return back()->withError($exception->getMessage())->withInput();
+
+        }
     }
 
     /**
