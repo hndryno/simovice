@@ -60,6 +60,9 @@ Vue.mixin({
       moment.locale("id");
       return moment(date, "YYYY-MM-DD").format("D MMMM YYYY");
     },
+    dateInputFormat(date){
+        return moment(date).format("YYYY-MM-DD");
+    },
     convertBoolean(bool){
       if(bool == 1){
         return 'Ya'
