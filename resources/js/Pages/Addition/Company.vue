@@ -2,44 +2,33 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                List Perusahaan
+                Category
             </h2>
         </template>
-
-        <div class="container">
-
-            <div class="py-12">
-                <div class="float-right md:mr-8">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCompany" @click="tambahModal">
-                        Tambah Data
-                    </button>
-                </div>
-
-                <div class="float-left ml-8">
-                     <div class="form-group">
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="grid grid-cols-12 gap-2 py-4 items-center">
+                    <div class="col-span-6 sm:col-span-4">
                         <input
-                            class="float-left form-control"
+                            class="h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200"
                             type="text"
                             v-model="search"
                             placeholder="Cari Perusahaan .."
-                            />
+                        />
                     </div>
-                 </div>
+                    <div class="col-span-6 sm:col-span-8 flex justify-end">
+                        <button @click="toggleModalAdd" type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg">
+                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="flex flex-col">
+                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
-            </div>
-
-        </div>
-
-            <div class="py-3">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <!-- This example requires Tailwind CSS v2.0+ -->
-                            <div class="flex flex-col">
-                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                    <table class="min-w-full divide-y divide-gray-200">
+                                <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
                                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -96,7 +85,9 @@
                                                 </div>
                                             </td>
                                             <td class="text-center px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900"> {{convertUnixTS(c.created_at)}}</div>
+                                                <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                    {{convertUnixTS(c.created_at)}}
+                                                </div>
                                             </td>
                                             <td class="text-center px-6 py-4 whitespace-nowrap">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -104,20 +95,14 @@
                                                 </span>
                                             </td>
                                             <td class="text-center px-6 py-4 whitespace-nowrap">
-                                                    <div class="btn-group" role="group">
-                                                    <button
-                                                        class="btn btn-info waves-effect waves-light"
-                                                        @click="editModal(c)"
-                                                    >
+                                                <div class="inline-flex">
+                                                    <button @click="toggleModalEdit(c)" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-3 rounded-l">
                                                         <font-awesome-icon :icon="['fas', 'paint-brush']" />
                                                     </button>
-                                                    <button
-                                                        class="btn btn-danger waves-effect waves-light"
-                                                        @click="deleteCompany(c.id)"
-                                                    >
+                                                    <button @click="doDelete(c.id)" class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-3 rounded-r">
                                                         <font-awesome-icon :icon="['fas', 'trash']" />
                                                     </button>
-                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -139,86 +124,108 @@
                                     </tbody>
 
                                     </table>
-                                </div>
-                                </div>
                             </div>
-                            </div>
-                        <!-- end table -->
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
-        <!-- </div> -->
+        </div>
 
-<!-- modal -->
-           <div class="modal fade" id="addCompany" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 v-show="!editMode" class="modal-title" id="exampleModalLabel">Tambah Perusahaan</h5>
-                        <h5 v-show="editMode" class="modal-title" id="exampleModalLabel">Ubah Perusahaan</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formCompany" @submit.prevent="editMode ? updateCompany() : addCompany()">
-                            <div class="form-group">
-                                <label for="nama_perusahaan">Nama Perusahaan</label>
-                                <input type="text" v-model="company.nama_perusahaan" class="form-control" name="nama_perusahaan" id="nama_perusahaan" aria-describedby="helpId" placeholder="Masukan Nama Perusahaan .." required>
-                                <!-- <small id="helpId" class="form-text text-muted">Masukan nama Perusahaan</small> -->
+        <jet-modal
+            :show="modalMode==='EDIT' ? isShowModalEdit : modalMode==='ADD' ? isShowModalAdd : false"
+            @close="modalMode==='EDIT' ? isShowModalEdit=false : modalMode==='ADD' ? isShowModalAdd=false : false"
+        >
+            <div class="mt-10 sm:mt-0">
+                <div class="md:grid md:grid-cols-3 md:gap-6">
+                    <div class="sm:mt-3 md:col-span-3">
+                        <div class="text-2xl px-4 sm:px-6">
+                            <p v-if="modalMode==='ADD'">Add Data</p>
+                            <p v-if="modalMode==='EDIT'">Edit Data</p>
+                        </div>
+                        <form id="categoryForm" @submit.prevent="modalMode==='EDIT' ? doEdit : modalMode==='ADD' ? doAdd : false">
+                            <div class="shadow overflow-hidden sm:rounded-md">
+                            <div class="px-4 py-5 bg-white sm:p-6">
+
+                                <div v-if="modalMode==='ADD'" class="grid grid-cols-6 grid-rows-3 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="nama_perusahaan" class="block text-sm font-medium text-gray-700">Nama Perusahaan</label>
+                                        <input type="text" v-model="company.nama_perusahaan" name="nama_perusahaan" id="nama_perusahaan" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="pic" class="block text-sm font-medium text-gray-700">Pic</label>
+                                        <input type="text" v-model="company.pic" name="pic" id="nama_perusahaan" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="telepon" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                                        <input type="text" v-model="company.telepon" name="telepon" id="nama_perusahaan" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="text" v-model="company.email" name="email" id="nama_perusahaan" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                </div>
+
+                                <div v-if="modalMode==='EDIT'" class="grid grid-cols-6 grid-rows-3 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="nama_perusahaan" class="block text-sm font-medium text-gray-700">Nama Perusahaan</label>
+                                        <input type="text" v-model="company.nama_perusahaan" name="nama_perusahaan" id="nama_perusahaan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="pic" class="block text-sm font-medium text-gray-700">Pic</label>
+                                        <input type="text" v-model="company.pic" name="pic" id="nama_perusahaan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="telepon" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                                        <input type="text" v-model="company.telepon" name="telepon" id="nama_perusahaan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="text" v-model="company.email" name="email" id="nama_perusahaan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                </div>
                             </div>
-                             <div class="form-group">
-                                <label for="pic">Pic</label>
-                                <input type="text" v-model="company.pic" class="form-control" name="pic" id="pic" aria-describedby="helpId" placeholder="Masukan Pic ..">
+
+                            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                <button v-if="modalMode==='ADD'" @click="doAdd" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                Add
+                                </button>
+                                <button v-if="modalMode==='EDIT'" @click="doEdit" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Save
+                                </button>
+                                <button v-if="modalMode==='ADD'" @click="toggleModalAdd" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-3">
+                                Cancel
+                                </button>
+                                <button v-if="modalMode==='EDIT'" @click="toggleModalEdit" type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-3">
+                                Cancel
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="telepon">Nomor Telepon</label>
-                                <input type="number" v-model="company.telepon" class="form-control" name="telepon" id="telepon" aria-describedby="helpId" placeholder="Masukan Nomor Telepon ..">
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" v-model="company.email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Masukan email ..">
-                            </div>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <button
-                                v-show="!editMode"
-                                type="submit"
-                                class="btn btn-primary waves-effect waves-light"
-                            >Simpan</button>
-                            <button
-                                v-show="editMode"
-                                type="submit"
-                                class="btn btn-primary waves-effect waves-light"
-                            >Update</button>
-                            <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
                         </form>
                     </div>
-                    <div class="modal-footer">
-
-                    </div>
-                    </div>
                 </div>
             </div>
+        </jet-modal>
 
-<!-- end modal -->
     </app-layout>
-
-
 </template>
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import Welcome from '@/Jetstream/Welcome'
+    import JetModal from '@/Jetstream/Modal'
 
     export default {
         components: {
             AppLayout,
             Welcome,
+            JetModal,
         },
-
-        data(){
-            return{
-                editMode: false,
+        data() {
+            return {
+                modalMode: '',
+                isShowModalAdd: false,
+                isShowModalEdit: false,
                 companies: [],
                 company: new Form({
                     id: '',
@@ -231,39 +238,51 @@
             }
         },
         methods: {
-            async addCompany(){
+            toggleColorPicker(){
+                this.isOpenColorPicker = !this.isOpenColorPicker
+            },
+            toggleModalAdd(){
+                this.company.reset();
+                this.isShowModalAdd = !this.isShowModalAdd
+                this.modalMode = 'ADD'
+            },
+            toggleModalEdit(c){
+                this.company.reset();
+                this.isShowModalEdit = !this.isShowModalEdit
+                this.modalMode = 'EDIT'
+                this.company.fill(c);
+            },
+            async getCompany(){
+                await axios.get('api/company', this.company)
+                .then((res) => {
+                    this.companies = res.data
+                }).catch((err) => {
+                    console.log(err.response)
+                });
+            },
+            async doAdd(){
                 const res = await axios.post('api/company', this.company)
-
-                console.log(res)
-
                 if(res.status == 201){
                     Toast.fire({
                         icon: 'success',
                         title: res.data
                     })
-
-                    document.getElementById('formCompany').reset()
-                    $("#addCompany").modal('hide')
-
-                    Fire.$emit('addedCompany')
+                    Fire.$emit('addSuccess')
+                    this.isShowModalAdd = !this.isShowModalAdd
                 }
             },
-            async updateCompany(){
+            async doEdit(){
                 const res = await axios.put('api/company/'+this.company.id, this.company)
-
                 if(res.status == 200){
                     Toast.fire({
                         icon: 'success',
                         title: res.data
                     })
-
-                    document.getElementById('formCompany').reset()
-                    $("#addCompany").modal('hide')
-
-                    Fire.$emit('addedCompany')
+                    Fire.$emit('editSuccess')
+                    this.isShowModalEdit = !this.isShowModalEdit
                 }
             },
-            async deleteCompany(c){
+            async doDelete(c){
                 Toast
                     .fire({
                     title: "Apakah anda yakin?",
@@ -279,7 +298,7 @@
                         axios.delete("/api/company/" + c)
                         .then(() => {
                             Toast.fire("Menghapus!", "File anda telah terhapus", "success");
-                            Fire.$emit("addedCompany");
+                            Fire.$emit("deleteSuccess");
                         })
                         .catch((err) => {
                             console.log(err)
@@ -288,30 +307,19 @@
                     }
                 });
             },
-            async getCompany(){
-                console.log(this.companies.length)
-                await axios.get('api/company', this.company)
-                .then((res) => {
-                    this.companies = res.data
-                }).catch((err) => {
-                    console.log(err)
-                });
-            },
-            editModal(c) {
-                this.company.reset();
-                this.editMode = true;
-                $("#addCompany").modal("show");
-                this.company.fill(c);
-            },
-            tambahModal() {
-                this.company.reset();
-                this.editMode = false;
-                $("#addCompany").modal("show");
-            },
         },
         created(){
             this.getCompany();
-            Fire.$on('addedCompany', () => {
+            Fire.$on('addSuccess', () => {
+                console.log('add success')
+                this.getCompany()
+            })
+            Fire.$on('editSuccess', () => {
+                console.log('edit success')
+                this.getCompany()
+            })
+            Fire.$on('deleteSuccess', () => {
+                console.log('delete success')
                 this.getCompany()
             })
         },
@@ -324,5 +332,5 @@
                 });
             }
         }
-}
+    }
 </script>
