@@ -31,70 +31,70 @@
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
-                                             <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                             <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 No
                                             </th>
-                                            <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Nama Perusahaan
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Pic
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Telepon
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Email
                                             </th>
-                                            <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Tanggal Dibuat
                                             </th>
-                                            <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Tanggal Diedit
                                             </th>
-                                            <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Aksi
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200" v-if="companies.length > 0">
                                         <tr v-for="(c, index) in FilteredCompany" :key="c.id">
-                                             <td class="text-center px-6 py-4 whitespace-nowrap">
+                                             <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{index + 1}}</div>
                                                 </div>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.nama_perusahaan}}</div>
                                                 </div>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.pic}}</div>
                                                 </div>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.telepon}}</div>
                                                 </div>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.email}}</div>
                                                 </div>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                                     {{convertUnixTS(c.created_at)}}
                                                 </div>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                     {{convertUnixTS(c.updated_at)}}
                                                 </span>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="inline-flex">
                                                     <button @click="toggleModalEdit(c)" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-3 rounded-l">
                                                         <font-awesome-icon :icon="['fas', 'paint-brush']" />

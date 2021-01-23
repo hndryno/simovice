@@ -31,110 +31,110 @@
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 No
                                             </th>
-                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                             <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Kode
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Nama Perusahaan
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Harga VO
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Tanggal Aggrement
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Tanggal Selesai
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Fasilitas Meeting Room
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Fasilitas Konsultasi Pajak
                                             </th>
-                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                             <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Fasilitas Private Office
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Papan Nama Perusahaan
                                             </th>
-                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                             <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Tanggal Ubah
                                             </th>
-                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                             <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                Tanggal Update
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Aksi
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200" v-if="virtualOffices.length > 0">
-                                        <tr v-for="(c, index) in virtualOffices" :key="c.id">
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                        <tr v-for="(c, index) in FilteredVirtualOffice" :key="c.id">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{index + 1}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.kode_vo}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.company.nama_perusahaan}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.harga_vo}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{convertUnixTS(c.tanggal_aggrement)}}</div>
+                                            <td class="px-4 py-3 whitespace-nowrap">
+                                                <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                {{convertUnixTS(c.tanggal_aggrement)}}
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                <div class="text-sm text-gray-900">{{convertUnixTS(c.tanggal_selesai)}}</div>
+                                            <td class="px-4 py-3 whitespace-nowrap">
+                                                <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                {{convertUnixTS(c.tanggal_selesai)}}
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.fasilitas_meeting_room}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.fasilitas_konsultasi_pajak}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{c.fasilitas_private_office}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                 <div class="text-sm text-gray-900">{{convertBoolean(c.papan_nama_perusahaan)}}</div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                                     {{convertUnixTS(c.created_at)}}
                                                 </span>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            <td class="px-4 py-3 whitespace-nowrap">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                                                     {{convertUnixTS(c.updated_at)}}
                                                 </span>
                                             </td>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap">
+                                            <td class="px-4 py-3 whitespace-nowrap">
                                                 <div class="inline-flex">
                                                     <button @click="toggleModalEdit(c)" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-3 rounded-l">
                                                         <font-awesome-icon :icon="['fas', 'paint-brush']" />
@@ -155,7 +155,7 @@
                                         </tr>
                                     </tbody>
 
-                                    <tbody class="bg-white divide-y divide-gray-200" v-if="!FilteredCompany">
+                                    <tbody class="bg-white divide-y divide-gray-200" v-if="!FilteredVirtualOffice">
                                         <tr>
                                             <td class="text-center px-6 py-4 whitespace-nowrap" colspan="6">
                                                 Data tidak ditemukan
@@ -447,7 +447,7 @@
             })
         },
         computed: {
-            FilteredCompany: function() {
+            FilteredVirtualOffice: function() {
                 return this.virtualOffices.filter(virtualOffice => {
                     return (
                         virtualOffice.kode_vo.match(this.search)
