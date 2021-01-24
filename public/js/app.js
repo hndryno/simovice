@@ -12783,7 +12783,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['href', 'active'],
   computed: {
     classes: function classes() {
-      return this.active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
+      return this.active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-600 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
     }
   }
 });
@@ -12817,7 +12817,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['active', 'href', 'as'],
   computed: {
     classes: function classes() {
-      return this.active ? 'block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out' : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out';
+      return this.active ? 'block pl-3 pr-4 py-2 border-l-4 border-indigo-600 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out' : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out';
     }
   }
 });
@@ -13879,6 +13879,170 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13901,7 +14065,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         telepon: '',
         email: ''
       }),
-      search: ""
+      search: '',
+      inputDestinationPageLeft: null,
+      inputDestinationPageRight: null,
+      currentSort: 'nama_perusahaan',
+      currentSortDir: 'asc',
+      itemsPerPage: 10,
+      itemsPerPageList: [{
+        value: 10,
+        label: '10'
+      }, {
+        value: 15,
+        label: '15'
+      }, {
+        value: 20,
+        label: '20'
+      }, {
+        value: 25,
+        label: '25'
+      }],
+      currentPage: 1
     };
   },
   methods: {
@@ -14039,6 +14222,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    sort: function sort(s) {
+      // if s == current sort, reverse
+      if (s === this.currentSort) {
+        this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
+      }
+
+      this.currentSort = s;
+    },
+    changeCurrentPage: function changeCurrentPage(n) {
+      this.currentPage = n;
+      this.inputDestinationPageRight = null;
+      this.inputDestinationPageLeft = null;
+    },
+    changeItemsPerPage: function changeItemsPerPage(n) {
+      this.itemsPerPage = n;
+    },
+    nextPage: function nextPage() {
+      if (this.currentPage * this.itemsPerPage < this.FilteredCompany.length) this.currentPage++;
+    },
+    prevPage: function prevPage() {
+      if (this.currentPage > 1) this.currentPage--;
     }
   },
   created: function created() {
@@ -14046,27 +14251,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     this.getCompany();
     Fire.$on('addSuccess', function () {
-      console.log('add success');
-
+      /*
+      * add success
+      */
       _this4.getCompany();
     });
     Fire.$on('editSuccess', function () {
-      console.log('edit success');
-
+      /*
+      * edit success
+      */
       _this4.getCompany();
     });
     Fire.$on('deleteSuccess', function () {
-      console.log('delete success');
-
+      /*
+      * delete success
+      */
       _this4.getCompany();
     });
   },
   computed: {
+    totalPages: function totalPages() {
+      return Math.ceil(this.FilteredCompany.length / this.itemsPerPage);
+    },
     FilteredCompany: function FilteredCompany() {
       var _this5 = this;
 
       return this.companies.filter(function (company) {
-        return company.nama_perusahaan.match(_this5.search);
+        return company.nama_perusahaan.match(_this5.search) || company.pic.match(_this5.search) || company.telepon.toString().match(_this5.search) || company.email.match(_this5.search);
+      });
+    },
+    SortedCompany: function SortedCompany() {
+      var _this6 = this;
+
+      /****
+      * Handle when currentPage > Total Page after Filtered
+      ****/
+      if (this.FilteredCompany.length) {
+        if (this.currentPage > this.totalPages) {
+          this.currentPage = this.totalPages;
+        }
+      } else {
+        this.currentPage = 1;
+      }
+
+      return this.FilteredCompany.sort(function (a, b) {
+        // sorting Filtered data
+        var modifier = 1;
+        if (_this6.currentSortDir === 'desc') modifier = -1;
+        if (a[_this6.currentSort] < b[_this6.currentSort]) return -1 * modifier;
+        if (a[_this6.currentSort] > b[_this6.currentSort]) return 1 * modifier;
+        return 0;
+      }).filter(function (row, index) {
+        // filtering data base on itemsPerPage
+        var start = (_this6.currentPage - 1) * _this6.itemsPerPage;
+        var end = _this6.currentPage * _this6.itemsPerPage;
+        if (index >= start && index < end) return true;
       });
     }
   }
@@ -14095,6 +14334,178 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14327,6 +14738,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
+/* harmony import */ var _Jetstream_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Modal */ "./resources/js/Jetstream/Modal.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -14614,16 +15026,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__.default,
-    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_2__.default
+    Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_2__.default,
+    JetModal: _Jetstream_Modal__WEBPACK_IMPORTED_MODULE_3__.default
   },
   data: function data() {
     return {
-      editMode: false,
+      modalMode: false,
+      isShowModalAdd: false,
+      isShowModalEdit: false,
       virtualOffices: [],
       companies: [],
       virtualOffice: new Form({
@@ -14642,32 +15097,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    addvirtualOffice: function addvirtualOffice() {
+    toggleColorPicker: function toggleColorPicker() {
+      this.isOpenColorPicker = !this.isOpenColorPicker;
+    },
+    toggleModalAdd: function toggleModalAdd() {
+      this.virtualOffice.reset();
+      this.isShowModalAdd = !this.isShowModalAdd;
+      this.modalMode = 'ADD';
+    },
+    toggleModalEdit: function toggleModalEdit(c) {
+      this.virtualOffice.reset();
+      this.isShowModalEdit = !this.isShowModalEdit;
+      this.modalMode = 'EDIT';
+      this.virtualOffice.fill(c);
+    },
+    getCompany: function getCompany() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.post('api/virtual-office', _this.virtualOffice);
+                return axios.get('api/company', _this.virtualOffice).then(function (res) {
+                  _this.companies = res.data;
+                })["catch"](function (err) {
+                  console.log(err.response);
+                });
 
               case 2:
-                res = _context.sent;
-
-                if (res.status == 201) {
-                  Toast.fire({
-                    icon: 'success',
-                    title: res.data
-                  });
-                  document.getElementById('formvirtualOffice').reset();
-                  $("#addvirtualOffice").modal('hide');
-                  Fire.$emit('addedvirtualOffice');
-                }
-
-              case 4:
               case "end":
                 return _context.stop();
             }
@@ -14675,32 +15134,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    updatevirtualOffice: function updatevirtualOffice() {
+    getVirtualOffice: function getVirtualOffice() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.put('api/virtual-office/' + _this2.virtualOffice.id, _this2.virtualOffice);
+                return axios.get('api/virtual-office', _this2.virtualOffice).then(function (res) {
+                  _this2.virtualOffices = res.data;
+                })["catch"](function (err) {
+                  console.log(err.response);
+                });
 
               case 2:
-                res = _context2.sent;
-
-                if (res.status == 200) {
-                  Toast.fire({
-                    icon: 'success',
-                    title: res.data
-                  });
-                  document.getElementById('formvirtualOffice').reset();
-                  $("#addvirtualOffice").modal('hide');
-                  Fire.$emit('addedvirtualOffice');
-                }
-
-              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -14708,16 +15157,80 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    deletevirtualOffice: function deletevirtualOffice(c) {
+    doAdd: function doAdd() {
+      var _this3 = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                _context3.next = 2;
+                return axios.post('api/virtual-office', _this3.virtualOffice);
+
+              case 2:
+                res = _context3.sent;
+
+                if (res.status == 201) {
+                  Toast.fire({
+                    icon: 'success',
+                    title: res.data
+                  });
+                  Fire.$emit('addSuccess');
+                  _this3.isShowModalAdd = !_this3.isShowModalAdd;
+                }
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    doEdit: function doEdit() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.put('api/virtual-office/' + _this4.virtualOffice.id, _this4.virtualOffice);
+
+              case 2:
+                res = _context4.sent;
+
+                if (res.status == 200) {
+                  Toast.fire({
+                    icon: 'success',
+                    title: res.data
+                  });
+                  Fire.$emit('editSuccess');
+                  _this4.isShowModalEdit = !_this4.isShowModalEdit;
+                }
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    doDelete: function doDelete(c) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
                 Toast.fire({
                   title: "Apakah anda yakin?",
                   text: "Data yang dihapus tidak bisa dikembalikan!",
-                  type: "warning",
+                  // type: "warning",
                   showCancelButton: true,
                   confirmButtonColor: "#3085d6",
                   cancelButtonColor: "#d33",
@@ -14726,8 +15239,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (result.value) {
                     axios["delete"]("/api/virtual-office/" + c).then(function () {
                       Toast.fire("Menghapus!", "File anda telah terhapus", "success");
-                      Fire.$emit("addedvirtualOffice");
-                    })["catch"](function () {
+                      Fire.$emit("deleteSuccess");
+                    })["catch"](function (err) {
+                      console.log(err);
                       Toast.fire("Gagal!", "Ada sesuatu yang salah.", "warning");
                     });
                   }
@@ -14735,88 +15249,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 1:
               case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    },
-    getvirtualOffice: function getvirtualOffice() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return axios.get('api/virtual-office').then(function (res) {
-                  console.log(res);
-                  _this3.virtualOffices = res.data;
-                })["catch"](function (err) {
-                  console.log(err);
-                });
-
-              case 2:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }))();
-    },
-    getCompany: function getCompany() {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.next = 2;
-                return axios.get('api/company').then(function (res) {
-                  // console.log(res)
-                  _this4.companies = res.data;
-                })["catch"](function (err) {
-                  console.log(err);
-                });
-
-              case 2:
-              case "end":
                 return _context5.stop();
             }
           }
         }, _callee5);
       }))();
-    },
-    editModal: function editModal(c) {
-      this.virtualOffice.reset();
-      this.editMode = true;
-      $("#addvirtualOffice").modal("show");
-      this.virtualOffice.fill(c);
-    },
-    tambahModal: function tambahModal() {
-      this.virtualOffice.reset();
-      this.editMode = false;
-      $("#addvirtualOffice").modal("show");
     }
   },
   created: function created() {
     var _this5 = this;
 
-    this.getvirtualOffice();
     this.getCompany();
-    Fire.$on('addedvirtualOffice', function () {
-      _this5.getvirtualOffice();
+    this.getVirtualOffice();
+    Fire.$on('addSuccess', function () {
+      console.log('add success');
+
+      _this5.getVirtualOffice();
+    });
+    Fire.$on('editSuccess', function () {
+      console.log('edit success');
+
+      _this5.getVirtualOffice();
+    });
+    Fire.$on('deleteSuccess', function () {
+      console.log('delete success');
+
+      _this5.getVirtualOffice();
     });
   },
   computed: {
-    FilteredVo: function FilteredVo() {
+    FilteredVirtualOffice: function FilteredVirtualOffice() {
+      var _this6 = this;
+
       return this.virtualOffices.filter(function (virtualOffice) {
-        console.log(virtualOffice); // return (
-        //     virtualOffice.harga_vo.match(this.search)
-        // );
+        return virtualOffice.kode_vo.match(_this6.search);
       });
+    },
+    format_tanggal_aggrement: {
+      get: function get() {
+        return this.dateInputFormat(this.virtualOffice.tanggal_aggrement);
+      },
+      set: function set(val) {
+        this.virtualOffice['tanggal_aggrement'] = val;
+      }
+    },
+    format_tanggal_selesai: {
+      get: function get() {
+        return this.dateInputFormat(this.virtualOffice.tanggal_selesai);
+      },
+      set: function set(val) {
+        this.virtualOffice['tanggal_selesai'] = val;
+      }
     }
   }
 });
@@ -16718,6 +17201,9 @@ vue__WEBPACK_IMPORTED_MODULE_8__.default.mixin({
       moment__WEBPACK_IMPORTED_MODULE_6___default().locale("id");
       return moment__WEBPACK_IMPORTED_MODULE_6___default()(date, "YYYY-MM-DD").format("D MMMM YYYY");
     },
+    dateInputFormat: function dateInputFormat(date) {
+      return moment__WEBPACK_IMPORTED_MODULE_6___default()(date).format("YYYY-MM-DD");
+    },
     convertBoolean: function convertBoolean(bool) {
       if (bool == 1) {
         return 'Ya';
@@ -16762,6 +17248,30 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chrome, Safari, Edge, Opera */\n.inputDestinationPage[data-v-66e000f3]::-webkit-outer-spin-button,\n.inputDestinationPage[data-v-66e000f3]::-webkit-inner-spin-button {\n-webkit-appearance: none;\nmargin: 0;\n}\n/* Firefox */\n.inputDestinationPage[type=number][data-v-66e000f3] {\n-moz-appearance: textfield;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
 
 /***/ }),
 
@@ -58087,6 +58597,36 @@ try {
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_style_index_0_id_66e000f3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_style_index_0_id_66e000f3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_style_index_0_id_66e000f3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css& ***!
@@ -64234,23 +64774,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _Company_vue_vue_type_template_id_66e000f3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Company.vue?vue&type=template&id=66e000f3& */ "./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&");
+/* harmony import */ var _Company_vue_vue_type_template_id_66e000f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Company.vue?vue&type=template&id=66e000f3&scoped=true& */ "./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&scoped=true&");
 /* harmony import */ var _Company_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Company.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Addition/Company.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Company_vue_vue_type_style_index_0_id_66e000f3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css& */ "./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _Company_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Company_vue_vue_type_template_id_66e000f3___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Company_vue_vue_type_template_id_66e000f3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Company_vue_vue_type_template_id_66e000f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Company_vue_vue_type_template_id_66e000f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "66e000f3",
   null
   
 )
@@ -65709,6 +66251,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_style_index_0_id_66e000f3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=style&index=0&id=66e000f3&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css&":
 /*!*************************************************************************************************!*\
   !*** ./resources/js/Pages/Welcome.vue?vue&type=style&index=0&id=317d1a6e&scoped=true&lang=css& ***!
@@ -66232,19 +66787,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3& ***!
-  \********************************************************************************/
+/***/ "./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&scoped=true& ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_template_id_66e000f3___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_template_id_66e000f3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_template_id_66e000f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_template_id_66e000f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_template_id_66e000f3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Company.vue?vue&type=template&id=66e000f3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Company_vue_vue_type_template_id_66e000f3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Company.vue?vue&type=template&id=66e000f3&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&scoped=true&");
 
 
 /***/ }),
@@ -70160,10 +70715,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Addition/Company.vue?vue&type=template&id=66e000f3&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -70200,11 +70755,11 @@ var render = function() {
     },
     [
       _vm._v(" "),
-      _c("div", { staticClass: "py-12" }, [
+      _c("div", { staticClass: "pt-12" }, [
         _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
           _c(
             "div",
-            { staticClass: "grid grid-cols-12 gap-2 py-4 items-center" },
+            { staticClass: "grid grid-cols-12 gap-4 py-4 items-center" },
             [
               _c("div", { staticClass: "col-span-6 sm:col-span-4" }, [
                 _c("input", {
@@ -70257,7 +70812,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg" },
+            { staticClass: "bg-white overflow-hidden shadow-lg sm:rounded-lg" },
             [
               _c("div", { staticClass: "flex flex-col" }, [
                 _c(
@@ -70291,110 +70846,348 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                        attrs: { scope: "col" }
+                                          "select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                        attrs: { scope: "col" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sort("nama_perusahaan")
+                                          }
+                                        }
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            No\n                                        "
-                                        )
-                                      ]
+                                          "\n                                                Nama Perusahaan\n                                                "
+                                        ),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort ===
+                                                "nama_perusahaan" &&
+                                              _vm.currentSortDir === "asc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort ===
+                                                "nama_perusahaan" &&
+                                              _vm.currentSortDir === "desc"
+                                          },
+                                          attrs: {
+                                            icon: ["fas", "sort-amount-up"]
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort ===
+                                                "nama_perusahaan" &&
+                                              _vm.currentSortDir === "desc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort ===
+                                                "nama_perusahaan" &&
+                                              _vm.currentSortDir === "asc"
+                                          },
+                                          attrs: {
+                                            icon: [
+                                              "fas",
+                                              "sort-amount-down-alt"
+                                            ]
+                                          }
+                                        })
+                                      ],
+                                      1
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "th",
                                       {
                                         staticClass:
-                                          "text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                        attrs: { scope: "col" }
+                                          "select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                        attrs: { scope: "col" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sort("pic")
+                                          }
+                                        }
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            Nama Perusahaan\n                                        "
-                                        )
-                                      ]
+                                          "\n                                                Pic\n                                                "
+                                        ),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort === "pic" &&
+                                              _vm.currentSortDir === "asc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort === "pic" &&
+                                              _vm.currentSortDir === "desc"
+                                          },
+                                          attrs: {
+                                            icon: ["fas", "sort-amount-up"]
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort === "pic" &&
+                                              _vm.currentSortDir === "desc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort === "pic" &&
+                                              _vm.currentSortDir === "asc"
+                                          },
+                                          attrs: {
+                                            icon: [
+                                              "fas",
+                                              "sort-amount-down-alt"
+                                            ]
+                                          }
+                                        })
+                                      ],
+                                      1
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                        attrs: { scope: "col" }
+                                          "select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                        attrs: { scope: "col" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sort("telepon")
+                                          }
+                                        }
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            Pic\n                                        "
-                                        )
-                                      ]
+                                          "\n                                                Telepon\n                                                "
+                                        ),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort === "telepon" &&
+                                              _vm.currentSortDir === "asc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort === "telepon" &&
+                                              _vm.currentSortDir === "desc"
+                                          },
+                                          attrs: {
+                                            icon: ["fas", "sort-amount-up"]
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort === "telepon" &&
+                                              _vm.currentSortDir === "desc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort === "telepon" &&
+                                              _vm.currentSortDir === "asc"
+                                          },
+                                          attrs: {
+                                            icon: [
+                                              "fas",
+                                              "sort-amount-down-alt"
+                                            ]
+                                          }
+                                        })
+                                      ],
+                                      1
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                        attrs: { scope: "col" }
+                                          "select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                        attrs: { scope: "col" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sort("email")
+                                          }
+                                        }
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            Telepon\n                                        "
-                                        )
-                                      ]
+                                          "\n                                                Email\n                                                "
+                                        ),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort === "email" &&
+                                              _vm.currentSortDir === "asc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort === "email" &&
+                                              _vm.currentSortDir === "desc"
+                                          },
+                                          attrs: {
+                                            icon: ["fas", "sort-amount-up"]
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort === "email" &&
+                                              _vm.currentSortDir === "desc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort === "email" &&
+                                              _vm.currentSortDir === "asc"
+                                          },
+                                          attrs: {
+                                            icon: [
+                                              "fas",
+                                              "sort-amount-down-alt"
+                                            ]
+                                          }
+                                        })
+                                      ],
+                                      1
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                        attrs: { scope: "col" }
+                                          "select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                        attrs: { scope: "col" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sort("created_at")
+                                          }
+                                        }
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            Email\n                                        "
-                                        )
-                                      ]
+                                          "\n                                                Tanggal Dibuat\n                                                "
+                                        ),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort ===
+                                                "created_at" &&
+                                              _vm.currentSortDir === "asc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort ===
+                                                "created_at" &&
+                                              _vm.currentSortDir === "desc"
+                                          },
+                                          attrs: {
+                                            icon: ["fas", "sort-amount-up"]
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort ===
+                                                "created_at" &&
+                                              _vm.currentSortDir === "desc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort ===
+                                                "created_at" &&
+                                              _vm.currentSortDir === "asc"
+                                          },
+                                          attrs: {
+                                            icon: [
+                                              "fas",
+                                              "sort-amount-down-alt"
+                                            ]
+                                          }
+                                        })
+                                      ],
+                                      1
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "th",
                                       {
                                         staticClass:
-                                          "text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                        attrs: { scope: "col" }
+                                          "select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                        attrs: { scope: "col" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.sort("updated_at")
+                                          }
+                                        }
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            Tanggal Dibuat\n                                        "
-                                        )
-                                      ]
+                                          "\n                                                Tanggal Diedit\n                                                "
+                                        ),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort ===
+                                                "updated_at" &&
+                                              _vm.currentSortDir === "asc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort ===
+                                                "updated_at" &&
+                                              _vm.currentSortDir === "desc"
+                                          },
+                                          attrs: {
+                                            icon: ["fas", "sort-amount-up"]
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("font-awesome-icon", {
+                                          staticClass:
+                                            "text-transparent group-hover:text-gray-300",
+                                          class: {
+                                            "text-gray-500 group-hover:text-gray-500":
+                                              _vm.currentSort ===
+                                                "updated_at" &&
+                                              _vm.currentSortDir === "desc",
+                                            "text-gray-300 group-hover:text-gray-300":
+                                              _vm.currentSort ===
+                                                "updated_at" &&
+                                              _vm.currentSortDir === "asc"
+                                          },
+                                          attrs: {
+                                            icon: [
+                                              "fas",
+                                              "sort-amount-down-alt"
+                                            ]
+                                          }
+                                        })
+                                      ],
+                                      1
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "th",
                                       {
                                         staticClass:
-                                          "text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "select-none whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            Tanggal Diedit\n                                        "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "th",
-                                      {
-                                        staticClass:
-                                          "text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                        attrs: { scope: "col" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            Aksi\n                                        "
+                                          "\n                                                Aksi\n                                            "
                                         )
                                       ]
                                     )
@@ -70408,43 +71201,13 @@ var render = function() {
                                         staticClass:
                                           "bg-white divide-y divide-gray-200"
                                       },
-                                      _vm._l(_vm.FilteredCompany, function(
-                                        c,
-                                        index
-                                      ) {
+                                      _vm._l(_vm.SortedCompany, function(c) {
                                         return _c("tr", { key: c.id }, [
                                           _c(
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [_vm._v(_vm._s(index + 1))]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
+                                                "px-4 py-3 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -70477,7 +71240,7 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
+                                                "px-4 py-3 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -70504,7 +71267,7 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
+                                                "px-4 py-3 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -70531,7 +71294,7 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
+                                                "px-4 py-3 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -70558,7 +71321,7 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
+                                                "px-4 py-3 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -70569,13 +71332,13 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                                " +
+                                                    "\n                                                    " +
                                                       _vm._s(
                                                         _vm.convertUnixTS(
                                                           c.created_at
                                                         )
                                                       ) +
-                                                      "\n                                            "
+                                                      "\n                                                "
                                                   )
                                                 ]
                                               )
@@ -70586,7 +71349,7 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
+                                                "px-4 py-3 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -70597,13 +71360,13 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                                " +
+                                                    "\n                                                    " +
                                                       _vm._s(
                                                         _vm.convertUnixTS(
                                                           c.updated_at
                                                         )
                                                       ) +
-                                                      "\n                                            "
+                                                      "\n                                                "
                                                   )
                                                 ]
                                               )
@@ -70614,7 +71377,7 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap"
+                                                "px-4 py-3 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -70625,7 +71388,7 @@ var render = function() {
                                                     "button",
                                                     {
                                                       staticClass:
-                                                        "bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-3 rounded-l",
+                                                        "bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded-l",
                                                       on: {
                                                         click: function(
                                                           $event
@@ -70653,7 +71416,7 @@ var render = function() {
                                                     "button",
                                                     {
                                                       staticClass:
-                                                        "bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-3 rounded-r",
+                                                        "bg-pink-600 hover:bg-pink-500 text-white font-bold py-2 px-3 rounded-r",
                                                       on: {
                                                         click: function(
                                                           $event
@@ -70696,12 +71459,12 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap",
-                                              attrs: { colspan: "8" }
+                                                "text-center text-xs px-6 py-4 whitespace-nowrap",
+                                              attrs: { colspan: "12" }
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                            Data kosong\n                                        "
+                                                "\n                                                Data kosong\n                                            "
                                               )
                                             ]
                                           )
@@ -70710,7 +71473,8 @@ var render = function() {
                                     )
                                   : _vm._e(),
                                 _vm._v(" "),
-                                !_vm.FilteredCompany
+                                _vm.companies.length &&
+                                _vm.SortedCompany.length == 0
                                   ? _c(
                                       "tbody",
                                       {
@@ -70723,12 +71487,12 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap",
-                                              attrs: { colspan: "6" }
+                                                "text-center text-xs px-6 py-4 whitespace-nowrap",
+                                              attrs: { colspan: "12" }
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                            Data tidak ditemukan\n                                        "
+                                                "\n                                                Data tidak ditemukan\n                                            "
                                               )
                                             ]
                                           )
@@ -70740,6 +71504,362 @@ var render = function() {
                             )
                           ]
                         )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "grid grid-cols-12 gap-4 py-4 items-start" },
+            [
+              _c("div", { staticClass: "col-span-12" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "flex text-gray-700 justify-end items-center"
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "grid grid-flow-col auto-cols-max md:auto-cols-min gap-4"
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "dropdown group inline-block relative"
+                          },
+                          [
+                            _c(
+                              "ul",
+                              {
+                                staticClass:
+                                  "dropdown-content absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "shadow-lg rounded-full" },
+                                  _vm._l(_vm.itemsPerPageList, function(
+                                    item,
+                                    index
+                                  ) {
+                                    return _c("li", { key: index }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "bg-white hover:bg-gray-50 block w-full py-1 text-sm focus:outline-none",
+                                          class: {
+                                            "bg-gray-100":
+                                              _vm.itemsPerPage === item.value,
+                                            "rounded-t-full": index === 0,
+                                            "rounded-b-full":
+                                              index ===
+                                              _vm.itemsPerPageList.length - 1
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeItemsPerPage(
+                                                item.value
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(item.label))]
+                                      )
+                                    ])
+                                  }),
+                                  0
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "group-hover:text-gray-500  min-w-max w-12 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center"
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  staticClass:
+                                    "group-hover:transform group-hover:rotate-90",
+                                  attrs: { icon: ["fas", "caret-left"] }
+                                }),
+                                _vm._v(
+                                  " " +
+                                    _vm._s(_vm.itemsPerPage) +
+                                    "\n                                "
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h-10 w-10 mr-1 flex justify-center items-center rounded-full bg-white hover:bg-gray-100 cursor-pointer shadow-md",
+                              on: { click: _vm.prevPage }
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass:
+                                    "feather feather-chevron-left w-4 h-4",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    width: "100%",
+                                    height: "100%",
+                                    fill: "none",
+                                    viewBox: "0 0 24 24",
+                                    stroke: "currentColor",
+                                    "stroke-width": "2",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round"
+                                  }
+                                },
+                                [
+                                  _c("polyline", {
+                                    attrs: { points: "15 18 9 12 15 6" }
+                                  })
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "flex h-10 font-medium rounded-full bg-white shadow-md"
+                            },
+                            [
+                              _vm._l(_vm.totalPages, function(n) {
+                                return Math.abs(n - _vm.currentPage) < 5 ||
+                                  n == _vm.totalPages ||
+                                  n == 1
+                                  ? _c(
+                                      "div",
+                                      {
+                                        key: n,
+                                        staticClass:
+                                          "min-w-max w-10 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full select-none text-sm",
+                                        class: {
+                                          "bg-yellow-600 text-white":
+                                            n === _vm.currentPage,
+                                          "hover:bg-gray-100":
+                                            n !== _vm.currentPage,
+                                          "w-16 hover:bg-transparent":
+                                            (_vm.currentPage > 6 &&
+                                              n === _vm.currentPage - 4 &&
+                                              n !== 1 &&
+                                              n !== _vm.totalPages) ||
+                                            (n === _vm.currentPage + 4 &&
+                                              n !== 1 &&
+                                              n !== _vm.totalPages)
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            !(
+                                              (_vm.currentPage > 6 &&
+                                                n === _vm.currentPage - 4 &&
+                                                n !== 1 &&
+                                                n !== _vm.totalPages) ||
+                                              (n === _vm.currentPage + 4 &&
+                                                n !== 1 &&
+                                                n !== _vm.totalPages)
+                                            ) && _vm.changeCurrentPage(n)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm.currentPage > 6 &&
+                                        n === _vm.currentPage - 4 &&
+                                        n !== 1 &&
+                                        n !== _vm.totalPages
+                                          ? _c("span", [
+                                              _c(
+                                                "form",
+                                                {
+                                                  on: {
+                                                    submit: function($event) {
+                                                      $event.preventDefault()
+                                                      _vm.changeCurrentPage(
+                                                        parseInt(
+                                                          _vm.inputDestinationPageLeft
+                                                        )
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.inputDestinationPageLeft,
+                                                        expression:
+                                                          "inputDestinationPageLeft"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent",
+                                                    attrs: {
+                                                      min: 1,
+                                                      max: _vm.currentPage - 1,
+                                                      type: "number",
+                                                      placeholder: "..."
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.inputDestinationPageLeft
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.inputDestinationPageLeft =
+                                                          $event.target.value
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            ])
+                                          : n === _vm.currentPage + 4 &&
+                                            n !== 1 &&
+                                            n !== _vm.totalPages
+                                          ? _c("span", [
+                                              _c(
+                                                "form",
+                                                {
+                                                  on: {
+                                                    submit: function($event) {
+                                                      $event.preventDefault()
+                                                      _vm.changeCurrentPage(
+                                                        parseInt(
+                                                          _vm.inputDestinationPageRight
+                                                        )
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.inputDestinationPageRight,
+                                                        expression:
+                                                          "inputDestinationPageRight"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent",
+                                                    attrs: {
+                                                      min: _vm.currentPage + 1,
+                                                      max: _vm.totalPages,
+                                                      type: "number",
+                                                      placeholder: "..."
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.inputDestinationPageRight
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.inputDestinationPageRight =
+                                                          $event.target.value
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            ])
+                                          : _c("span", [_vm._v(_vm._s(n))])
+                                      ]
+                                    )
+                                  : _vm._e()
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "min-w-max w-10 h-10 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.currentPage) +
+                                      "/" +
+                                      _vm._s(_vm.totalPages)
+                                  )
+                                ]
+                              )
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h-10 w-10 ml-1 flex justify-center items-center rounded-full bg-white hover:bg-gray-100 cursor-pointer shadow-md",
+                              on: { click: _vm.nextPage }
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass:
+                                    "feather feather-chevron-right w-4 h-4",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    width: "100%",
+                                    height: "100%",
+                                    fill: "none",
+                                    viewBox: "0 0 24 24",
+                                    stroke: "currentColor",
+                                    "stroke-width": "2",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round"
+                                  }
+                                },
+                                [
+                                  _c("polyline", {
+                                    attrs: { points: "9 18 15 12 9 6" }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ])
                       ]
                     )
                   ]
@@ -71060,7 +72180,7 @@ var render = function() {
                                             }
                                           ],
                                           staticClass:
-                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            "mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
                                           attrs: {
                                             type: "text",
                                             name: "nama_perusahaan",
@@ -71111,7 +72231,7 @@ var render = function() {
                                             }
                                           ],
                                           staticClass:
-                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            "mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
                                           attrs: {
                                             type: "text",
                                             name: "pic",
@@ -71160,7 +72280,7 @@ var render = function() {
                                             }
                                           ],
                                           staticClass:
-                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            "mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
                                           attrs: {
                                             type: "text",
                                             name: "telepon",
@@ -71211,7 +72331,7 @@ var render = function() {
                                             }
                                           ],
                                           staticClass:
-                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            "mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
                                           attrs: {
                                             type: "text",
                                             name: "email",
@@ -71270,7 +72390,7 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass:
-                                      "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                      "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
                                     attrs: { type: "submit" },
                                     on: { click: _vm.doEdit }
                                   },
@@ -71378,457 +72498,618 @@ var render = function() {
     [
       _vm._v(" "),
       _c("div", { staticClass: "py-12" }, [
-        _c("div", { staticClass: "md:container md:mx-auto" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+          _c("div", { staticClass: "grid grid-cols-12 gap-4" }, [
+            _c("div", { staticClass: "col-span-4" }, [
               _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.searchVo($event)
-                    }
-                  }
-                },
+                "div",
+                { staticClass: "grid grid-cols-6 gap-4 items-center" },
                 [
-                  _c("div", { staticClass: "input-group col-md-10" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.search,
-                          expression: "search"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "search",
-                        placeholder: "Masukan Kode Virtual Office",
-                        id: "example-search-input"
-                      },
-                      domProps: { value: _vm.search },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                  _c("div", { staticClass: "col-span-6" }, [
+                    _c(
+                      "form",
+                      {
+                        staticClass: "flex shadow-lg sm:rounded-lg",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.searchVo($event)
                           }
-                          _vm.search = $event.target.value
                         }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "input-group-append" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                Cari Data\n                            "
-                          )
-                        ]
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "py-5" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _vm._v(
-                      "\n                                Data Perusahaan\n                            "
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.search,
+                              expression: "search"
+                            }
+                          ],
+                          staticClass:
+                            "h-10 w-full sm:rounded-l-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Cari Virtual Office .."
+                          },
+                          domProps: { value: _vm.search },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.search = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "h-10 px-2 sm:rounded-r-lg bg-blue-500 border-gray-200 border-t border-b border-r whitespace-nowrap text-white focus:outline-none",
+                            attrs: { type: "submit" }
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: ["fas", "search"] }
+                            }),
+                            _vm._v(" Cari\n                                ")
+                          ],
+                          1
+                        )
+                      ]
                     )
                   ]),
                   _vm._v(" "),
-                  _vm.company.hasOwnProperty("id")
-                    ? _c("div", { staticClass: "card-body" }, [
-                        _c(
-                          "ul",
-                          { staticClass: "list-group list-group-flush" },
-                          [
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Nama Perusahaan : ")]),
-                              _vm._v(
-                                _vm._s(_vm.company.company.nama_perusahaan)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("PIC : ")]),
-                              _vm._v(_vm._s(_vm.company.company.pic) + " ")
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Telepon :")]),
-                              _vm._v(_vm._s(_vm.company.company.telepon) + " ")
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Email : ")]),
-                              _vm._v(_vm._s(_vm.company.company.email) + " ")
-                            ])
-                          ]
-                        )
-                      ])
-                    : _c("div", { staticClass: "card-body" }, [
-                        _c(
-                          "ul",
-                          { staticClass: "list-group list-group-flush" },
-                          [
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Nama Perusahaan : ")]),
-                              _vm._v("Data Kosong")
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("PIC : ")]),
-                              _vm._v("Data Kosong")
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Telepon : ")]),
-                              _vm._v("Data Kosong")
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Email : ")]),
-                              _vm._v("Data Kosong")
-                            ])
-                          ]
-                        )
-                      ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _vm._v(
-                    "\n                                Virtual Office\n                            "
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.company.hasOwnProperty("company")
-                  ? _c("div", { staticClass: "card-body" }, [
-                      _c("ul", { staticClass: "list-group list-group-flush" }, [
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [
-                            _vm._v(
-                              "Harga Vo : " + _vm._s(_vm.company.harga_vo) + " "
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [
-                            _vm._v(
-                              "Tanggal Aggrement : " +
-                                _vm._s(_vm.company.tanggal_aggrement) +
-                                " "
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Tanggal Selesai : ")]),
-                          _vm._v(_vm._s(_vm.company.tanggal_selesai))
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Fasilitas Meeting Room : ")]),
-                          _vm._v(_vm._s(_vm.company.fasilitas_konsultasi_pajak))
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Fasilitas Konsultasi Pajak : ")]),
-                          _vm._v(_vm._s(_vm.company.fasilitas_private_office))
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Fasilitas Private Office : ")]),
-                          _vm._v(_vm._s(_vm.company.fasilitas_private_office))
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Papan Nama Perusahaan : ")]),
-                          _vm._v(_vm._s(_vm.company.papan_nama_perusahaan))
-                        ])
-                      ])
-                    ])
-                  : _c("div", { staticClass: "card-body" }, [
-                      _c("ul", { staticClass: "list-group list-group-flush" }, [
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Harga Vo : ")]),
-                          _vm._v("Data Kosong")
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Tanggal Aggrement : ")]),
-                          _vm._v("Data Kosong")
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Tanggal Selesai : ")]),
-                          _vm._v("Data Kosong")
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Fasilitas Meeting Room : ")]),
-                          _vm._v("Data Kosong")
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Fasilitas Konsultasi Pajak : ")]),
-                          _vm._v("Data Kosong")
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Fasilitas Private Office : ")]),
-                          _vm._v("Data Kosong")
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Papan Nama Perusahaan : ")]),
-                          _vm._v("Data Kosong")
-                        ])
-                      ])
-                    ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "py-4" }),
-              _vm._v(" "),
-              _c("div", {}, [
-                _c("div", { staticClass: "flex flex-col" }, [
-                  _c(
-                    "div",
-                    { staticClass: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" },
-                    [
+                  _c("div", { staticClass: "col-span-6" }, [
+                    _c("div", { staticClass: "max-w-full" }, [
                       _c(
                         "div",
-                        {
-                          staticClass:
-                            "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
-                        },
+                        { staticClass: "bg-white shadow-lg rounded-lg py-3" },
                         [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-                            },
-                            [
-                              _c(
-                                "table",
-                                {
-                                  staticClass:
-                                    "min-w-full divide-y divide-gray-200"
-                                },
-                                [
-                                  _c("thead", { staticClass: "bg-gray-50" }, [
-                                    _c("tr", [
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Jan\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Feb\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Mar\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Apr\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Mei\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Jun\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Jul\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Agu\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Sep\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Okt\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Nov\n                                            "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "th",
-                                        {
-                                          staticClass:
-                                            "px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                          attrs: { scope: "col" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Des\n                                            "
-                                          )
-                                        ]
-                                      )
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("tbody", { staticClass: "bg-gray-50" }, [
+                          _c("div", { staticClass: "py-2 px-10" }, [
+                            _c(
+                              "h3",
+                              {
+                                staticClass:
+                                  "text-center text-xl text-gray-900 font-medium leading-8"
+                              },
+                              [_vm._v("Data Perusahan")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "text-center text-gray-400 text-xs font-semibold"
+                              },
+                              [_c("p", [_vm._v("menampilkan data perusahan")])]
+                            ),
+                            _vm._v(" "),
+                            _vm.company.hasOwnProperty("company")
+                              ? _c("table", { staticClass: "text-xs my-3" }, [
+                                  _c("tbody", [
                                     _c("tr", [
                                       _c(
                                         "td",
                                         {
                                           staticClass:
-                                            "text-center px-6 py-4 whitespace-nowrap",
-                                          attrs: { colspan: "12" }
+                                            "px-2 py-2 text-gray-500 font-semibold"
                                         },
-                                        [
-                                          _vm._v(
-                                            "\n                                                Data kosong\n                                            "
+                                        [_vm._v("Nama Perusahaan")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.company.company.nama_perusahaan
                                           )
-                                        ]
-                                      )
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Person in Charge")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(_vm._s(_vm.company.company.pic))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Telepone")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.company.company.telepon)
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Email")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.company.company.email)
+                                        )
+                                      ])
                                     ])
                                   ])
-                                ]
-                              )
-                            ]
-                          )
+                                ])
+                              : _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mt-3 bg-red-400 text-white rounded-xl text-center font-bold"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            data tidak tersedia\n                                        "
+                                    )
+                                  ]
+                                )
+                          ])
                         ]
                       )
-                    ]
-                  )
-                ])
-              ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-span-6" }, [
+                    _c("div", { staticClass: "max-w-full" }, [
+                      _c(
+                        "div",
+                        { staticClass: "bg-white shadow-lg rounded-lg py-3" },
+                        [
+                          _c("div", { staticClass: "py-2 px-10" }, [
+                            _c(
+                              "h3",
+                              {
+                                staticClass:
+                                  "text-center text-xl text-gray-900 font-medium leading-8"
+                              },
+                              [_vm._v("Virtual Office")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "text-center text-gray-400 text-xs font-semibold"
+                              },
+                              [
+                                _c("p", [
+                                  _vm._v("menampilkan data virtual office")
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm.company.hasOwnProperty("id")
+                              ? _c("table", { staticClass: "text-xs my-3" }, [
+                                  _c("tbody", [
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Harga Virtual Office")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(_vm._s(_vm.company.harga_vo))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Tanggal Aggrement")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.company.tanggal_aggrement)
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Tanggal Selesai")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.company.tanggal_selesai)
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Fasilitas Meeting Room")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.company.fasilitas_meeting_room
+                                          )
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Fasilitas Konsultasi Pajak")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.company
+                                              .fasilitas_konsultasi_pajak
+                                          )
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Fasilitas Private Office")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.company.fasilitas_private_office
+                                          )
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "px-2 py-2 text-gray-500 font-semibold"
+                                        },
+                                        [_vm._v("Papan Nama Perusahaan")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "px-2 py-2" }, [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.company.papan_nama_perusahaan
+                                          )
+                                        )
+                                      ])
+                                    ])
+                                  ])
+                                ])
+                              : _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mt-3 bg-red-400 text-white rounded-xl text-center font-bold"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            data tidak tersedia\n                                        "
+                                    )
+                                  ]
+                                )
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-span-8" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "bg-white overflow-hidden shadow-lg sm:rounded-lg"
+                },
+                [
+                  _c("div", { staticClass: "flex flex-col" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+                              },
+                              [
+                                _c(
+                                  "table",
+                                  {
+                                    staticClass:
+                                      "min-w-full divide-y divide-gray-200"
+                                  },
+                                  [
+                                    _c("thead", { staticClass: "bg-gray-50" }, [
+                                      _c("tr", [
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Jan\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Feb\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Mar\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Apr\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Mei\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Jun\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Jul\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Agu\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Sep\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Okt\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Nov\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                            attrs: { scope: "col" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        Des\n                                                    "
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "tbody",
+                                      {
+                                        staticClass:
+                                          "bg-white divide-y divide-gray-200"
+                                      },
+                                      [
+                                        _c("tr", [
+                                          _c(
+                                            "td",
+                                            {
+                                              staticClass:
+                                                "text-sm text-center py-4 whitespace-nowrap",
+                                              attrs: { colspan: "12" }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "bg-red-400 text-white rounded-xl text-center font-bold"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                            data tidak tersedia\n                                                        "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
             ])
           ])
         ])
@@ -71883,61 +73164,67 @@ var render = function() {
     },
     [
       _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "py-12" }, [
-          _c("div", { staticClass: "float-right md:mr-8" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                attrs: {
-                  type: "button",
-                  "data-toggle": "modal",
-                  "data-target": "#addvirtualOffice"
-                },
-                on: { click: _vm.tambahModal }
-              },
-              [
-                _vm._v(
-                  "\n                        Tambah Data\n                    "
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "float-left ml-8" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.search,
-                    expression: "search"
-                  }
-                ],
-                staticClass: "float-left form-control",
-                attrs: { type: "text", placeholder: "Cari Perusahaan" },
-                domProps: { value: _vm.search },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.search = $event.target.value
-                  }
-                }
-              })
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "py-3" }, [
+      _c("div", { staticClass: "py-12" }, [
         _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
           _c(
             "div",
-            { staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg" },
+            { staticClass: "grid grid-cols-12 gap-2 py-4 items-center" },
+            [
+              _c("div", { staticClass: "col-span-6 sm:col-span-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass:
+                    "h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Cari Virtual Office .."
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-span-6 sm:col-span-8 flex justify-end" },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg",
+                      attrs: { type: "button" },
+                      on: { click: _vm.toggleModalAdd }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        attrs: { icon: ["fas", "plus"] }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "bg-white overflow-hidden shadow-lg sm:rounded-lg" },
             [
               _c("div", { staticClass: "flex flex-col" }, [
                 _c(
@@ -71971,7 +73258,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -71985,7 +73272,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -71999,7 +73286,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72013,7 +73300,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72027,7 +73314,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72041,7 +73328,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72055,7 +73342,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72069,7 +73356,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72083,7 +73370,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72097,7 +73384,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72111,7 +73398,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72125,7 +73412,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72139,7 +73426,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -72158,458 +73445,464 @@ var render = function() {
                                         staticClass:
                                           "bg-white divide-y divide-gray-200"
                                       },
-                                      _vm._l(_vm.virtualOffices, function(
-                                        c,
-                                        index
-                                      ) {
-                                        return _c("tr", { key: c.id }, [
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [_vm._v(_vm._s(index + 1))]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [_vm._v(_vm._s(c.kode_vo))]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          c.company
-                                                            .nama_perusahaan
+                                      _vm._l(
+                                        _vm.FilteredVirtualOffice,
+                                        function(c, index) {
+                                          return _c("tr", { key: c.id }, [
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(index + 1)
                                                         )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [_vm._v(_vm._s(c.harga_vo))]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [
-                                                      _vm._v(
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(c.kode_vo)
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            c.company
+                                                              .nama_perusahaan
+                                                          )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(c.harga_vo)
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                            " +
                                                         _vm._s(
                                                           _vm.convertUnixTS(
                                                             c.tanggal_aggrement
                                                           )
-                                                        )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [
-                                                      _vm._v(
+                                                        ) +
+                                                        "\n                                            "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                            " +
                                                         _vm._s(
                                                           _vm.convertUnixTS(
                                                             c.tanggal_selesai
                                                           )
-                                                        )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          c.fasilitas_meeting_room
-                                                        )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          c.fasilitas_konsultasi_pajak
-                                                        )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          c.fasilitas_private_office
-                                                        )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-sm text-gray-900"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm.convertBoolean(
-                                                            c.papan_nama_perusahaan
+                                                        ) +
+                                                        "\n                                            "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            c.fasilitas_meeting_room
                                                           )
                                                         )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                " +
-                                                      _vm._s(
-                                                        _vm.convertUnixTS(
-                                                          c.created_at
-                                                        )
-                                                      ) +
-                                                      "\n                                            "
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                " +
-                                                      _vm._s(
-                                                        _vm.convertUnixTS(
-                                                          c.updated_at
-                                                        )
-                                                      ) +
-                                                      "\n                                            "
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "td",
-                                            {
-                                              staticClass:
-                                                "px-6 py-4 whitespace-nowrap"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass: "btn-group",
-                                                  attrs: { role: "group" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "button",
-                                                    {
-                                                      staticClass:
-                                                        "btn btn-info waves-effect waves-light",
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.editModal(
-                                                            c
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            c.fasilitas_konsultasi_pajak
                                                           )
-                                                        }
-                                                      }
-                                                    },
-                                                    [
-                                                      _c("font-awesome-icon", {
-                                                        attrs: {
-                                                          icon: [
-                                                            "fas",
-                                                            "paint-brush"
-                                                          ]
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "button",
-                                                    {
-                                                      staticClass:
-                                                        "btn btn-danger waves-effect waves-light",
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.deleteCompany(
-                                                            c.id
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            c.fasilitas_private_office
                                                           )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "flex items-center"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "text-sm text-gray-900"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.convertBoolean(
+                                                              c.papan_nama_perusahaan
+                                                            )
+                                                          )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(
+                                                          _vm.convertUnixTS(
+                                                            c.created_at
+                                                          )
+                                                        ) +
+                                                        "\n                                            "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(
+                                                          _vm.convertUnixTS(
+                                                            c.updated_at
+                                                          )
+                                                        ) +
+                                                        "\n                                            "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "td",
+                                              {
+                                                staticClass:
+                                                  "px-4 py-3 whitespace-nowrap"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "inline-flex"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "button",
+                                                      {
+                                                        staticClass:
+                                                          "bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-3 rounded-l",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.toggleModalEdit(
+                                                              c
+                                                            )
+                                                          }
                                                         }
-                                                      }
-                                                    },
-                                                    [
-                                                      _c("font-awesome-icon", {
-                                                        attrs: {
-                                                          icon: ["fas", "trash"]
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "font-awesome-icon",
+                                                          {
+                                                            attrs: {
+                                                              icon: [
+                                                                "fas",
+                                                                "paint-brush"
+                                                              ]
+                                                            }
+                                                          }
+                                                        )
+                                                      ],
+                                                      1
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "button",
+                                                      {
+                                                        staticClass:
+                                                          "bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-3 rounded-r",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.doDelete(
+                                                              c.id
+                                                            )
+                                                          }
                                                         }
-                                                      })
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          )
-                                        ])
-                                      }),
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "font-awesome-icon",
+                                                          {
+                                                            attrs: {
+                                                              icon: [
+                                                                "fas",
+                                                                "trash"
+                                                              ]
+                                                            }
+                                                          }
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        }
+                                      ),
                                       0
                                     )
                                   : _vm._e(),
@@ -72627,12 +73920,40 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "text-center px-6 py-4 whitespace-nowrap",
-                                              attrs: { colspan: "11" }
+                                                "text-center text-xs px-6 py-4 whitespace-nowrap",
+                                              attrs: { colspan: "12" }
                                             },
                                             [
                                               _vm._v(
                                                 "\n                                            Data kosong\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.virtualOffices.length &&
+                                _vm.FilteredVirtualOffice.length == 0
+                                  ? _c(
+                                      "tbody",
+                                      {
+                                        staticClass:
+                                          "bg-white divide-y divide-gray-200"
+                                      },
+                                      [
+                                        _c("tr", [
+                                          _c(
+                                            "td",
+                                            {
+                                              staticClass:
+                                                "text-center text-xs px-6 py-4 whitespace-nowrap",
+                                              attrs: { colspan: "12" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            Data tidak ditemukan\n                                        "
                                               )
                                             ]
                                           )
@@ -72655,533 +73976,1243 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c(
-        "div",
+        "jet-modal",
         {
-          staticClass: "modal fade",
           attrs: {
-            id: "addvirtualOffice",
-            tabindex: "-1",
-            role: "dialog",
-            "aria-labelledby": "exampleModalLabel",
-            "aria-hidden": "true"
+            show:
+              _vm.modalMode === "EDIT"
+                ? _vm.isShowModalEdit
+                : _vm.modalMode === "ADD"
+                ? _vm.isShowModalAdd
+                : false
+          },
+          on: {
+            close: function($event) {
+              _vm.modalMode === "EDIT"
+                ? (_vm.isShowModalEdit = false)
+                : _vm.modalMode === "ADD"
+                ? (_vm.isShowModalAdd = false)
+                : false
+            }
           }
         },
         [
-          _c(
-            "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "modal-header" }, [
-                  _c(
-                    "h5",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.editMode,
-                          expression: "!editMode"
-                        }
-                      ],
-                      staticClass: "modal-title",
-                      attrs: { id: "exampleModalLabel" }
-                    },
-                    [_vm._v("Tambah Virtual Office")]
-                  ),
+          _c("div", { staticClass: "mt-10 sm:mt-0" }, [
+            _c("div", { staticClass: "md:grid md:grid-cols-3 md:gap-6" }, [
+              _c("div", { staticClass: "sm:mt-3 md:col-span-3" }, [
+                _c("div", { staticClass: "text-2xl px-4 sm:px-6" }, [
+                  _vm.modalMode === "ADD"
+                    ? _c("p", [_vm._v("Add Data")])
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c(
-                    "h5",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.editMode,
-                          expression: "editMode"
-                        }
-                      ],
-                      staticClass: "modal-title",
-                      attrs: { id: "exampleModalLabel" }
-                    },
-                    [_vm._v("Ubah Perusahaan")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "close",
-                      attrs: {
-                        type: "button",
-                        "data-dismiss": "modal",
-                        "aria-label": "Close"
-                      }
-                    },
-                    [
-                      _c("span", { attrs: { "aria-hidden": "true" } }, [
-                        _vm._v("×")
-                      ])
-                    ]
-                  )
+                  _vm.modalMode === "EDIT"
+                    ? _c("p", [_vm._v("Edit Data")])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c(
-                    "form",
-                    {
-                      attrs: { id: "formvirtualOffice" },
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          _vm.editMode
-                            ? _vm.updatevirtualOffice()
-                            : _vm.addvirtualOffice()
-                        }
+                _c(
+                  "form",
+                  {
+                    attrs: { id: "categoryForm" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.modalMode === "EDIT"
+                          ? _vm.doEdit
+                          : _vm.modalMode === "ADD"
+                          ? _vm.doAdd
+                          : false
                       }
-                    },
-                    [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Pilih Perusahaan")
-                        ]),
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "shadow overflow-hidden sm:rounded-md" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "px-4 py-5 bg-white sm:p-6" },
+                          [
+                            _vm.modalMode === "ADD"
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "grid grid-cols-6 grid-rows-3 gap-6"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "company_id" }
+                                          },
+                                          [_vm._v("Pilih Perusahaan")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.virtualOffice.company_id,
+                                                expression:
+                                                  "virtualOffice.company_id"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            class: {
+                                              "is-invalid": _vm.virtualOffice.errors.has(
+                                                "company_id"
+                                              )
+                                            },
+                                            attrs: {
+                                              name: "company_id",
+                                              id: "company_id"
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.$set(
+                                                  _vm.virtualOffice,
+                                                  "company_id",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "" } },
+                                              [_vm._v("Pilih Perusahaan")]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._l(_vm.companies, function(d) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: d.id,
+                                                  domProps: { value: d.id }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(d.nama_perusahaan)
+                                                  )
+                                                ]
+                                              )
+                                            })
+                                          ],
+                                          2
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "kode_vo" }
+                                          },
+                                          [_vm._v("Kode Virtual Office")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.virtualOffice.kode_vo,
+                                              expression:
+                                                "virtualOffice.kode_vo"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "kode_vo",
+                                            id: "kode_vo"
+                                          },
+                                          domProps: {
+                                            value: _vm.virtualOffice.kode_vo
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "kode_vo",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "harga_vo" }
+                                          },
+                                          [_vm._v("Harga Virtual Office")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.virtualOffice.harga_vo,
+                                              expression:
+                                                "virtualOffice.harga_vo"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "harga_vo",
+                                            id: "harga_vo"
+                                          },
+                                          domProps: {
+                                            value: _vm.virtualOffice.harga_vo
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "harga_vo",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "tanggal_aggrement" }
+                                          },
+                                          [_vm._v("Tanggal Aggrement")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .tanggal_aggrement,
+                                              expression:
+                                                "virtualOffice.tanggal_aggrement"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "date",
+                                            name: "tanggal_aggrement",
+                                            id: "tanggal_aggrement"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .tanggal_aggrement
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "tanggal_aggrement",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "tanggal_selesai" }
+                                          },
+                                          [_vm._v("Tanggal Selesai")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .tanggal_selesai,
+                                              expression:
+                                                "virtualOffice.tanggal_selesai"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "date",
+                                            name: "tanggal_selesai",
+                                            id: "tanggal_selesai"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice.tanggal_selesai
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "tanggal_selesai",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "fasilitas_meeting_room"
+                                            }
+                                          },
+                                          [_vm._v("Fasilitas Meeting Room")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .fasilitas_meeting_room,
+                                              expression:
+                                                "virtualOffice.fasilitas_meeting_room"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "fasilitas_meeting_room",
+                                            id: "fasilitas_meeting_room"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .fasilitas_meeting_room
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "fasilitas_meeting_room",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "fasilitas_konsultasi_pajak"
+                                            }
+                                          },
+                                          [_vm._v("Fasilitas Konsultasi Pajak")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .fasilitas_konsultasi_pajak,
+                                              expression:
+                                                "virtualOffice.fasilitas_konsultasi_pajak"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "fasilitas_konsultasi_pajak",
+                                            id: "fasilitas_konsultasi_pajak"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .fasilitas_konsultasi_pajak
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "fasilitas_konsultasi_pajak",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "fasilitas_private_office"
+                                            }
+                                          },
+                                          [_vm._v("Fasilitas Private Office")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .fasilitas_private_office,
+                                              expression:
+                                                "virtualOffice.fasilitas_private_office"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "fasilitas_private_office",
+                                            id: "fasilitas_private_office"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .fasilitas_private_office
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "fasilitas_private_office",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "papan_nama_perusahaan"
+                                            }
+                                          },
+                                          [_vm._v("Papan Nama Perusahaan")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .papan_nama_perusahaan,
+                                              expression:
+                                                "virtualOffice.papan_nama_perusahaan"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "papan_nama_perusahaan",
+                                            id: "papan_nama_perusahaan"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .papan_nama_perusahaan
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "papan_nama_perusahaan",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.modalMode === "EDIT"
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "grid grid-cols-6 grid-rows-3 gap-6"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "company_id" }
+                                          },
+                                          [_vm._v("Pilih Perusahaan")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.virtualOffice.company_id,
+                                                expression:
+                                                  "virtualOffice.company_id"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            class: {
+                                              "is-invalid": _vm.virtualOffice.errors.has(
+                                                "company_id"
+                                              )
+                                            },
+                                            attrs: {
+                                              name: "company_id",
+                                              id: "company_id"
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.$set(
+                                                  _vm.virtualOffice,
+                                                  "company_id",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "" } },
+                                              [_vm._v("Pilih Perusahaan")]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._l(_vm.companies, function(d) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: d.id,
+                                                  domProps: { value: d.id }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(d.nama_perusahaan)
+                                                  )
+                                                ]
+                                              )
+                                            })
+                                          ],
+                                          2
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "kode_vo" }
+                                          },
+                                          [_vm._v("Kode Virtual Office")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.virtualOffice.kode_vo,
+                                              expression:
+                                                "virtualOffice.kode_vo"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "kode_vo",
+                                            id: "kode_vo"
+                                          },
+                                          domProps: {
+                                            value: _vm.virtualOffice.kode_vo
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "kode_vo",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "harga_vo" }
+                                          },
+                                          [_vm._v("Harga Virtual Office")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.virtualOffice.harga_vo,
+                                              expression:
+                                                "virtualOffice.harga_vo"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "harga_vo",
+                                            id: "harga_vo"
+                                          },
+                                          domProps: {
+                                            value: _vm.virtualOffice.harga_vo
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "harga_vo",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "tanggal_aggrement" }
+                                          },
+                                          [_vm._v("Tanggal Aggrement")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.format_tanggal_aggrement,
+                                              expression:
+                                                "format_tanggal_aggrement"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "date",
+                                            name: "tanggal_aggrement",
+                                            id: "tanggal_aggrement"
+                                          },
+                                          domProps: {
+                                            value: _vm.format_tanggal_aggrement
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.format_tanggal_aggrement =
+                                                $event.target.value
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "tanggal_selesai" }
+                                          },
+                                          [_vm._v("Tanggal Selesai")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.format_tanggal_selesai,
+                                              expression:
+                                                "format_tanggal_selesai"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "date",
+                                            name: "tanggal_selesai",
+                                            id: "tanggal_selesai"
+                                          },
+                                          domProps: {
+                                            value: _vm.format_tanggal_selesai
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.format_tanggal_selesai =
+                                                $event.target.value
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "fasilitas_meeting_room"
+                                            }
+                                          },
+                                          [_vm._v("Fasilitas Meeting Room")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .fasilitas_meeting_room,
+                                              expression:
+                                                "virtualOffice.fasilitas_meeting_room"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "fasilitas_meeting_room",
+                                            id: "fasilitas_meeting_room"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .fasilitas_meeting_room
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "fasilitas_meeting_room",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "fasilitas_konsultasi_pajak"
+                                            }
+                                          },
+                                          [_vm._v("Fasilitas Konsultasi Pajak")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .fasilitas_konsultasi_pajak,
+                                              expression:
+                                                "virtualOffice.fasilitas_konsultasi_pajak"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "fasilitas_konsultasi_pajak",
+                                            id: "fasilitas_konsultasi_pajak"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .fasilitas_konsultasi_pajak
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "fasilitas_konsultasi_pajak",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "fasilitas_private_office"
+                                            }
+                                          },
+                                          [_vm._v("Fasilitas Private Office")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .fasilitas_private_office,
+                                              expression:
+                                                "virtualOffice.fasilitas_private_office"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "fasilitas_private_office",
+                                            id: "fasilitas_private_office"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .fasilitas_private_office
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "fasilitas_private_office",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-span-6 sm:col-span-3"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: {
+                                              for: "papan_nama_perusahaan"
+                                            }
+                                          },
+                                          [_vm._v("Papan Nama Perusahaan")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.virtualOffice
+                                                  .papan_nama_perusahaan,
+                                              expression:
+                                                "virtualOffice.papan_nama_perusahaan"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                          attrs: {
+                                            type: "text",
+                                            name: "papan_nama_perusahaan",
+                                            id: "papan_nama_perusahaan"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.virtualOffice
+                                                .papan_nama_perusahaan
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.virtualOffice,
+                                                "papan_nama_perusahaan",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        ),
                         _vm._v(" "),
                         _c(
-                          "select",
+                          "div",
                           {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.virtualOffice.company_id,
-                                expression: "virtualOffice.company_id"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.virtualOffice.errors.has(
-                                "company_id"
-                              )
-                            },
-                            attrs: { name: "company_id", id: "company_id" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.virtualOffice,
-                                  "company_id",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
+                            staticClass:
+                              "px-4 py-3 bg-gray-50 text-right sm:px-6"
                           },
                           [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Pilih Perusahaan")
-                            ]),
+                            _vm.modalMode === "ADD"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500",
+                                    attrs: { type: "submit" },
+                                    on: { click: _vm.doAdd }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Add\n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
                             _vm._v(" "),
-                            _vm._l(_vm.companies, function(d) {
-                              return _c(
-                                "option",
-                                { key: d.id, domProps: { value: d.id } },
-                                [_vm._v(_vm._s(d.nama_perusahaan))]
-                              )
-                            })
-                          ],
-                          2
+                            _vm.modalMode === "EDIT"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                    attrs: { type: "submit" },
+                                    on: { click: _vm.doEdit }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Save\n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.modalMode === "ADD"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-3",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.toggleModalAdd }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Cancel\n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.modalMode === "EDIT"
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-3",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.toggleModalEdit }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Cancel\n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
                         )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "kode_vo" } }, [
-                          _vm._v("Kode")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.virtualOffice.kode_vo,
-                              expression: "virtualOffice.kode_vo"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "kode_vo",
-                            id: "kode_vo",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan Harga Virtual Office .."
-                          },
-                          domProps: { value: _vm.virtualOffice.kode_vo },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "kode_vo",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "harga_vo" } }, [
-                          _vm._v("Harga Virtual Office")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.virtualOffice.harga_vo,
-                              expression: "virtualOffice.harga_vo"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "harga_vo",
-                            id: "harga_vo",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan Harga Virtual Office .."
-                          },
-                          domProps: { value: _vm.virtualOffice.harga_vo },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "harga_vo",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "tanggal_aggrement" } }, [
-                          _vm._v("Tanggal Aggrement")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.virtualOffice.tanggal_aggrement,
-                              expression: "virtualOffice.tanggal_aggrement"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "date",
-                            name: "tanggal_aggrement",
-                            id: "tanggal_aggrement",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan Tanggal Aggrement .."
-                          },
-                          domProps: {
-                            value: _vm.virtualOffice.tanggal_aggrement
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "tanggal_aggrement",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "tanggal_selesai" } }, [
-                          _vm._v("Tanggal Selesai")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.virtualOffice.tanggal_selesai,
-                              expression: "virtualOffice.tanggal_selesai"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "date",
-                            name: "tanggal_selesai",
-                            id: "tanggal_selesai",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan Tanggal Selesai .."
-                          },
-                          domProps: {
-                            value: _vm.virtualOffice.tanggal_selesai
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "tanggal_selesai",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "fasilitas_meeting_room" } },
-                          [_vm._v("Fasilitas Meeting Room")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.virtualOffice.fasilitas_meeting_room,
-                              expression: "virtualOffice.fasilitas_meeting_room"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "fasilitas_meeting_room",
-                            id: "fasilitas_meeting_room",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan Fasilitas Meeting Room .."
-                          },
-                          domProps: {
-                            value: _vm.virtualOffice.fasilitas_meeting_room
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "fasilitas_meeting_room",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "fasilitas_konsultasi_pajak" } },
-                          [_vm._v("Fasilitas Konsultasi Pajak")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value:
-                                _vm.virtualOffice.fasilitas_konsultasi_pajak,
-                              expression:
-                                "virtualOffice.fasilitas_konsultasi_pajak"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "fasilitas_konsultasi_pajak",
-                            id: "fasilitas_konsultasi_pajak",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan fasilitas_konsultasi_pajak .."
-                          },
-                          domProps: {
-                            value: _vm.virtualOffice.fasilitas_konsultasi_pajak
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "fasilitas_konsultasi_pajak",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "fasilitas_private_office" } },
-                          [_vm._v("Fasilitas Private Office")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.virtualOffice.fasilitas_private_office,
-                              expression:
-                                "virtualOffice.fasilitas_private_office"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "fasilitas_private_office",
-                            id: "fasilitas_private_office",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan Fasilitas Private Office .."
-                          },
-                          domProps: {
-                            value: _vm.virtualOffice.fasilitas_private_office
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "fasilitas_private_office",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "papan_nama_perusahaan" } },
-                          [_vm._v("Papan Nama Perusahaan")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.virtualOffice.papan_nama_perusahaan,
-                              expression: "virtualOffice.papan_nama_perusahaan"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "papan_nama_perusahaan",
-                            id: "papan_nama_perusahaan",
-                            "aria-describedby": "helpId",
-                            placeholder: "Masukan Papan Nama Perusahaan .."
-                          },
-                          domProps: {
-                            value: _vm.virtualOffice.papan_nama_perusahaan
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.virtualOffice,
-                                "papan_nama_perusahaan",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-secondary",
-                          attrs: { type: "button", "data-dismiss": "modal" }
-                        },
-                        [_vm._v("Batal")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: !_vm.editMode,
-                              expression: "!editMode"
-                            }
-                          ],
-                          staticClass:
-                            "btn btn-primary waves-effect waves-light",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("Simpan")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.editMode,
-                              expression: "editMode"
-                            }
-                          ],
-                          staticClass:
-                            "btn btn-primary waves-effect waves-light",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("Update")]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" })
+                      ]
+                    )
+                  ]
+                )
               ])
-            ]
-          )
+            ])
+          ])
         ]
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []

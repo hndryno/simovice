@@ -22,7 +22,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                     <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -149,15 +149,15 @@
 
                                     <tbody class="bg-white divide-y divide-gray-200" v-if="virtualOffices.length == 0">
                                         <tr>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap" colspan="8">
+                                            <td class="text-center text-xs px-6 py-4 whitespace-nowrap" colspan="12">
                                                 Data kosong
                                             </td>
                                         </tr>
                                     </tbody>
 
-                                    <tbody class="bg-white divide-y divide-gray-200" v-if="!FilteredVirtualOffice">
+                                    <tbody class="bg-white divide-y divide-gray-200" v-if="virtualOffices.length && FilteredVirtualOffice.length == 0">
                                         <tr>
-                                            <td class="text-center px-6 py-4 whitespace-nowrap" colspan="6">
+                                            <td class="text-center text-xs px-6 py-4 whitespace-nowrap" colspan="12">
                                                 Data tidak ditemukan
                                             </td>
                                         </tr>
