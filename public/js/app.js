@@ -70869,7 +70869,7 @@ var render = function() {
                                   "div",
                                   {
                                     staticClass:
-                                      "min-w-max w-10 h-10 flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none"
+                                      "min-w-max w-10 h-10 flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none text-sm"
                                   },
                                   [
                                     _vm._v(
@@ -71035,8 +71035,7 @@ var render = function() {
                               {
                                 staticClass:
                                   "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:rounded-lg",
-                                attrs: { type: "button" },
-                                on: { click: function($event) {} }
+                                attrs: { type: "button" }
                               },
                               [
                                 _c("font-awesome-icon", {
@@ -71051,8 +71050,7 @@ var render = function() {
                               {
                                 staticClass:
                                   "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:rounded-lg",
-                                attrs: { type: "button" },
-                                on: { click: function($event) {} }
+                                attrs: { type: "button" }
                               },
                               [
                                 _c("font-awesome-icon", {
@@ -72094,7 +72092,7 @@ var render = function() {
                                 "div",
                                 {
                                   staticClass:
-                                    "min-w-max w-10 h-10 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none"
+                                    "min-w-max w-10 h-10 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none text-sm"
                                 },
                                 [
                                   _vm._v(
