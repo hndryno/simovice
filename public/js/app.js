@@ -14043,6 +14043,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14277,7 +14326,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return this.companies.filter(function (company) {
-        return company.nama_perusahaan.match(_this5.search) || company.pic.match(_this5.search) || company.telepon.toString().match(_this5.search) || company.email.match(_this5.search);
+        return company.nama_perusahaan.toUpperCase().match(_this5.search.toUpperCase()) || company.pic.toUpperCase().match(_this5.search.toUpperCase()) || company.telepon.toString().toUpperCase().match(_this5.search.toUpperCase()) || company.email.toUpperCase().match(_this5.search.toUpperCase());
       });
     },
     SortedCompany: function SortedCompany() {
@@ -17268,7 +17317,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chrome, Safari, Edge, Opera */\n.inputDestinationPage[data-v-66e000f3]::-webkit-outer-spin-button,\n.inputDestinationPage[data-v-66e000f3]::-webkit-inner-spin-button {\n-webkit-appearance: none;\nmargin: 0;\n}\n/* Firefox */\n.inputDestinationPage[type=number][data-v-66e000f3] {\n-moz-appearance: textfield;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chrome, Safari, Edge, Opera */\n.inputDestinationPage[data-v-66e000f3]::-webkit-outer-spin-button,\n.inputDestinationPage[data-v-66e000f3]::-webkit-inner-spin-button {\n-webkit-appearance: none;\nmargin: 0;\n}\n/* Firefox */\n.inputDestinationPage[type=number][data-v-66e000f3] {\n-moz-appearance: textfield;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70761,50 +70810,278 @@ var render = function() {
             "div",
             { staticClass: "grid grid-cols-12 gap-4 py-4 items-center" },
             [
-              _c("div", { staticClass: "col-span-6 sm:col-span-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.search,
-                      expression: "search"
-                    }
-                  ],
-                  staticClass:
-                    "h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200",
-                  attrs: { type: "text", placeholder: "Cari Perusahaan .." },
-                  domProps: { value: _vm.search },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.search = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "col-span-6 sm:col-span-8 flex justify-end" },
+                { staticClass: "col-span-12 text-gray-700 items-center" },
                 [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg",
-                      attrs: { type: "button" },
-                      on: { click: _vm.toggleModalAdd }
-                    },
-                    [
-                      _c("font-awesome-icon", {
-                        attrs: { icon: ["fas", "plus"] }
-                      })
-                    ],
-                    1
-                  )
+                  _c("div", { staticClass: "grid grid-cols-12 gap-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-span-12 gap-y-4 flex flex-wrap md:flex-nowrap"
+                      },
+                      [
+                        _c("div", { staticClass: "flex-grow-0" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "grid grid-flow-col auto-cols-max md:auto-cols-min gap-4"
+                            },
+                            [
+                              _c("div", { staticClass: "flex" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "h-10 w-10 mr-1 flex justify-center items-center rounded-full bg-white hover:bg-gray-100 cursor-pointer shadow-md",
+                                    on: { click: _vm.prevPage }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass:
+                                          "feather feather-chevron-left w-4 h-4",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          width: "100%",
+                                          height: "100%",
+                                          fill: "none",
+                                          viewBox: "0 0 24 24",
+                                          stroke: "currentColor",
+                                          "stroke-width": "2",
+                                          "stroke-linecap": "round",
+                                          "stroke-linejoin": "round"
+                                        }
+                                      },
+                                      [
+                                        _c("polyline", {
+                                          attrs: { points: "15 18 9 12 15 6" }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "min-w-max w-10 h-10 flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.currentPage) +
+                                        "/" +
+                                        _vm._s(_vm.totalPages)
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "h-10 w-10 ml-1 flex justify-center items-center rounded-full bg-white hover:bg-gray-100 cursor-pointer shadow-md",
+                                    on: { click: _vm.nextPage }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass:
+                                          "feather feather-chevron-right w-4 h-4",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          width: "100%",
+                                          height: "100%",
+                                          fill: "none",
+                                          viewBox: "0 0 24 24",
+                                          stroke: "currentColor",
+                                          "stroke-width": "2",
+                                          "stroke-linecap": "round",
+                                          "stroke-linejoin": "round"
+                                        }
+                                      },
+                                      [
+                                        _c("polyline", {
+                                          attrs: { points: "9 18 15 12 9 6" }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "group inline-block relative" },
+                                [
+                                  _c(
+                                    "ul",
+                                    {
+                                      staticClass:
+                                        "absolute inset-x-0 top-4 pt-6 hidden group-hover:block text-gray-700"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "shadow-lg rounded-full"
+                                        },
+                                        _vm._l(_vm.itemsPerPageList, function(
+                                          item,
+                                          index
+                                        ) {
+                                          return _c("li", { key: index }, [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "bg-white hover:bg-gray-50 block w-full py-1 text-sm focus:outline-none",
+                                                class: {
+                                                  "bg-gray-100":
+                                                    _vm.itemsPerPage ===
+                                                    item.value,
+                                                  "rounded-t-full": index === 0,
+                                                  "rounded-b-full":
+                                                    index ===
+                                                    _vm.itemsPerPageList
+                                                      .length -
+                                                      1
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.changeItemsPerPage(
+                                                      item.value
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v(_vm._s(item.label))]
+                                            )
+                                          ])
+                                        }),
+                                        0
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "group-hover:text-gray-500 min-w-max w-10 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center select-none"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(_vm.itemsPerPage) +
+                                          " "
+                                      ),
+                                      _c("font-awesome-icon", {
+                                        staticClass:
+                                          "group-hover:transform group-hover:rotate-90",
+                                        attrs: { icon: ["fas", "caret-right"] }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex-grow ml-4 md:mx-4" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.search,
+                                expression: "search"
+                              }
+                            ],
+                            staticClass:
+                              "h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200",
+                            attrs: {
+                              type: "text",
+                              placeholder: "Cari Perusahaan .."
+                            },
+                            domProps: { value: _vm.search },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.search = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "flex-grow md:flex-grow-0 flex justify-end gap-4"
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:rounded-lg",
+                                attrs: { type: "button" },
+                                on: { click: function($event) {} }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: { icon: ["fas", "file-export"] }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:rounded-lg",
+                                attrs: { type: "button" },
+                                on: { click: function($event) {} }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: { icon: ["fas", "print"] }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg",
+                                attrs: { type: "button" },
+                                on: { click: _vm.toggleModalAdd }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: { icon: ["fas", "plus"] }
+                                })
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
                 ]
               )
             ]
@@ -71532,15 +71809,13 @@ var render = function() {
                       [
                         _c(
                           "div",
-                          {
-                            staticClass: "dropdown group inline-block relative"
-                          },
+                          { staticClass: "group inline-block relative" },
                           [
                             _c(
                               "ul",
                               {
                                 staticClass:
-                                  "dropdown-content absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700"
+                                  "absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700"
                               },
                               [
                                 _c(
@@ -71585,7 +71860,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "group-hover:text-gray-500  min-w-max w-12 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center"
+                                  "group-hover:text-gray-500  min-w-max w-10 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center select-none"
                               },
                               [
                                 _c("font-awesome-icon", {
@@ -71643,169 +71918,176 @@ var render = function() {
                             "div",
                             {
                               staticClass:
-                                "flex h-10 font-medium rounded-full bg-white shadow-md"
+                                "flex font-medium rounded-full bg-white shadow-md"
                             },
                             [
                               _vm._l(_vm.totalPages, function(n) {
-                                return Math.abs(n - _vm.currentPage) < 5 ||
+                                return _c("div", { key: n }, [
+                                  Math.abs(n - _vm.currentPage) < 4 ||
                                   n == _vm.totalPages ||
                                   n == 1
-                                  ? _c(
-                                      "div",
-                                      {
-                                        key: n,
-                                        staticClass:
-                                          "min-w-max w-10 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full select-none text-sm",
-                                        class: {
-                                          "bg-yellow-600 text-white":
-                                            n === _vm.currentPage,
-                                          "hover:bg-gray-100":
-                                            n !== _vm.currentPage,
-                                          "w-16 hover:bg-transparent":
-                                            (_vm.currentPage > 6 &&
-                                              n === _vm.currentPage - 4 &&
-                                              n !== 1 &&
-                                              n !== _vm.totalPages) ||
-                                            (n === _vm.currentPage + 4 &&
-                                              n !== 1 &&
-                                              n !== _vm.totalPages)
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            !(
-                                              (_vm.currentPage > 6 &&
-                                                n === _vm.currentPage - 4 &&
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "min-w-max w-10 h-10 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full select-none text-sm",
+                                          class: {
+                                            "bg-yellow-600 text-white":
+                                              n === _vm.currentPage,
+                                            "hover:bg-gray-100":
+                                              n !== _vm.currentPage,
+                                            "w-16 hover:bg-transparent":
+                                              (_vm.currentPage >= 5 &&
+                                                n === _vm.currentPage - 3 &&
                                                 n !== 1 &&
                                                 n !== _vm.totalPages) ||
-                                              (n === _vm.currentPage + 4 &&
+                                              (n === _vm.currentPage + 3 &&
                                                 n !== 1 &&
                                                 n !== _vm.totalPages)
-                                            ) && _vm.changeCurrentPage(n)
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              !(
+                                                (_vm.currentPage >= 5 &&
+                                                  n === _vm.currentPage - 3 &&
+                                                  n !== 1 &&
+                                                  n !== _vm.totalPages) ||
+                                                (n === _vm.currentPage + 3 &&
+                                                  n !== 1 &&
+                                                  n !== _vm.totalPages)
+                                              ) && _vm.changeCurrentPage(n)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [
-                                        _vm.currentPage > 6 &&
-                                        n === _vm.currentPage - 4 &&
-                                        n !== 1 &&
-                                        n !== _vm.totalPages
-                                          ? _c("span", [
-                                              _c(
-                                                "form",
-                                                {
-                                                  on: {
-                                                    submit: function($event) {
-                                                      $event.preventDefault()
-                                                      _vm.changeCurrentPage(
-                                                        parseInt(
+                                        },
+                                        [
+                                          _vm.currentPage >= 5 &&
+                                          n === _vm.currentPage - 3 &&
+                                          n !== 1 &&
+                                          n !== _vm.totalPages
+                                            ? _c("span", [
+                                                _c(
+                                                  "form",
+                                                  {
+                                                    on: {
+                                                      submit: function($event) {
+                                                        $event.preventDefault()
+                                                        _vm.changeCurrentPage(
+                                                          parseInt(
+                                                            _vm.inputDestinationPageLeft
+                                                          )
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.inputDestinationPageLeft,
+                                                          expression:
+                                                            "inputDestinationPageLeft"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent",
+                                                      attrs: {
+                                                        min: 1,
+                                                        max:
+                                                          _vm.currentPage - 1,
+                                                        type: "number",
+                                                        placeholder: "..."
+                                                      },
+                                                      domProps: {
+                                                        value:
                                                           _vm.inputDestinationPageLeft
-                                                        )
-                                                      )
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _c("input", {
-                                                    directives: [
-                                                      {
-                                                        name: "model",
-                                                        rawName: "v-model",
-                                                        value:
-                                                          _vm.inputDestinationPageLeft,
-                                                        expression:
-                                                          "inputDestinationPageLeft"
-                                                      }
-                                                    ],
-                                                    staticClass:
-                                                      "inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent",
-                                                    attrs: {
-                                                      min: 1,
-                                                      max: _vm.currentPage - 1,
-                                                      type: "number",
-                                                      placeholder: "..."
-                                                    },
-                                                    domProps: {
-                                                      value:
-                                                        _vm.inputDestinationPageLeft
-                                                    },
-                                                    on: {
-                                                      input: function($event) {
-                                                        if (
-                                                          $event.target
-                                                            .composing
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
                                                         ) {
-                                                          return
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.inputDestinationPageLeft =
+                                                            $event.target.value
                                                         }
-                                                        _vm.inputDestinationPageLeft =
-                                                          $event.target.value
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ])
+                                            : n === _vm.currentPage + 3 &&
+                                              n !== 1 &&
+                                              n !== _vm.totalPages
+                                            ? _c("span", [
+                                                _c(
+                                                  "form",
+                                                  {
+                                                    on: {
+                                                      submit: function($event) {
+                                                        $event.preventDefault()
+                                                        _vm.changeCurrentPage(
+                                                          parseInt(
+                                                            _vm.inputDestinationPageRight
+                                                          )
+                                                        )
                                                       }
                                                     }
-                                                  })
-                                                ]
-                                              )
-                                            ])
-                                          : n === _vm.currentPage + 4 &&
-                                            n !== 1 &&
-                                            n !== _vm.totalPages
-                                          ? _c("span", [
-                                              _c(
-                                                "form",
-                                                {
-                                                  on: {
-                                                    submit: function($event) {
-                                                      $event.preventDefault()
-                                                      _vm.changeCurrentPage(
-                                                        parseInt(
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.inputDestinationPageRight,
+                                                          expression:
+                                                            "inputDestinationPageRight"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent",
+                                                      attrs: {
+                                                        min:
+                                                          _vm.currentPage + 1,
+                                                        max: _vm.totalPages,
+                                                        type: "number",
+                                                        placeholder: "..."
+                                                      },
+                                                      domProps: {
+                                                        value:
                                                           _vm.inputDestinationPageRight
-                                                        )
-                                                      )
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _c("input", {
-                                                    directives: [
-                                                      {
-                                                        name: "model",
-                                                        rawName: "v-model",
-                                                        value:
-                                                          _vm.inputDestinationPageRight,
-                                                        expression:
-                                                          "inputDestinationPageRight"
-                                                      }
-                                                    ],
-                                                    staticClass:
-                                                      "inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent",
-                                                    attrs: {
-                                                      min: _vm.currentPage + 1,
-                                                      max: _vm.totalPages,
-                                                      type: "number",
-                                                      placeholder: "..."
-                                                    },
-                                                    domProps: {
-                                                      value:
-                                                        _vm.inputDestinationPageRight
-                                                    },
-                                                    on: {
-                                                      input: function($event) {
-                                                        if (
-                                                          $event.target
-                                                            .composing
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
                                                         ) {
-                                                          return
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.inputDestinationPageRight =
+                                                            $event.target.value
                                                         }
-                                                        _vm.inputDestinationPageRight =
-                                                          $event.target.value
                                                       }
-                                                    }
-                                                  })
-                                                ]
-                                              )
-                                            ])
-                                          : _c("span", [_vm._v(_vm._s(n))])
-                                      ]
-                                    )
-                                  : _vm._e()
+                                                    })
+                                                  ]
+                                                )
+                                              ])
+                                            : _c("span", [_vm._v(_vm._s(n))])
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ])
                               }),
                               _vm._v(" "),
                               _c(

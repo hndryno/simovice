@@ -8,19 +8,68 @@
         <div class="pt-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-12 gap-4 py-4 items-center">
-                    <div class="col-span-6 sm:col-span-4">
-                        <input
-                            class="h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200"
-                            type="text"
-                            v-model="search"
-                            placeholder="Cari Perusahaan .."
-                        />
+
+                    <div class="col-span-12 text-gray-700 items-center">
+                        <div class="grid grid-cols-12 gap-4">
+                            <div class="col-span-12 gap-y-4 flex flex-wrap md:flex-nowrap">
+
+                                <div class="flex-grow-0">
+
+                                    <div class="grid grid-flow-col auto-cols-max md:auto-cols-min gap-4">
+                                        <div class="flex">
+                                            <div @click="prevPage" class="h-10 w-10 mr-1 flex justify-center items-center rounded-full bg-white hover:bg-gray-100 cursor-pointer shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left w-4 h-4">
+                                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                                </svg>
+                                            </div>
+                                            <div class="min-w-max w-10 h-10 flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none">{{currentPage}}/{{totalPages}}</div>
+                                            <div @click="nextPage" class="h-10 w-10 ml-1 flex justify-center items-center rounded-full bg-white hover:bg-gray-100 cursor-pointer shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right w-4 h-4">
+                                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="group inline-block relative">
+                                            <ul class="absolute inset-x-0 top-4 pt-6 hidden group-hover:block text-gray-700">
+                                                <div class="shadow-lg rounded-full">
+                                                    <li v-for="(item,index) in itemsPerPageList" :key="index">
+                                                        <button @click="changeItemsPerPage(item.value)" :class="{'bg-gray-100': itemsPerPage===item.value, 'rounded-t-full': index===0, 'rounded-b-full': index===itemsPerPageList.length-1}" class="bg-white hover:bg-gray-50 block w-full py-1 text-sm focus:outline-none">{{item.label}}</button>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                            <button class="group-hover:text-gray-500 min-w-max w-10 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center select-none">
+                                                {{itemsPerPage}}&nbsp;<font-awesome-icon class="group-hover:transform group-hover:rotate-90" :icon="['fas', 'caret-right']" />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="flex-grow ml-4 md:mx-4">
+                                    <input
+                                        class="h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200"
+                                        type="text"
+                                        v-model="search"
+                                        placeholder="Cari Perusahaan .."
+                                    />
+                                </div>
+                                
+                                <div class="flex-grow md:flex-grow-0 flex justify-end gap-4">
+                                    <button @click="" type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:rounded-lg">
+                                        <font-awesome-icon :icon="['fas', 'file-export']" />
+                                    </button>
+                                    <button @click="" type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:rounded-lg">
+                                        <font-awesome-icon :icon="['fas', 'print']" />
+                                    </button>
+                                    <button @click="toggleModalAdd" type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg">
+                                        <font-awesome-icon :icon="['fas', 'plus']" />
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-span-6 sm:col-span-8 flex justify-end">
-                        <button @click="toggleModalAdd" type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg">
-                            <font-awesome-icon :icon="['fas', 'plus']" />
-                        </button>
-                    </div>
+
                 </div>
                 <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                     <div class="flex flex-col">
@@ -213,15 +262,15 @@
                         <div class="flex text-gray-700 justify-end items-center">
 
                             <div class="grid grid-flow-col auto-cols-max md:auto-cols-min gap-4">
-                                <div class="dropdown group inline-block relative">
-                                    <ul class="dropdown-content absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700">
+                                <div class="group inline-block relative">
+                                    <ul class="absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700">
                                         <div class="shadow-lg rounded-full">
                                             <li v-for="(item,index) in itemsPerPageList" :key="index">
                                                 <button @click="changeItemsPerPage(item.value)" :class="{'bg-gray-100': itemsPerPage===item.value, 'rounded-t-full': index===0, 'rounded-b-full': index===itemsPerPageList.length-1}" class="bg-white hover:bg-gray-50 block w-full py-1 text-sm focus:outline-none">{{item.label}}</button>
                                             </li>
                                         </div>
                                     </ul>
-                                    <button class="group-hover:text-gray-500  min-w-max w-12 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center">
+                                    <button class="group-hover:text-gray-500  min-w-max w-10 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center select-none">
                                         <font-awesome-icon class="group-hover:transform group-hover:rotate-90" :icon="['fas', 'caret-left']" />&nbsp;{{itemsPerPage}}
                                     </button>
                                 </div>
@@ -232,38 +281,39 @@
                                         </svg>
                                         <!-- <font-awesome-icon :icon="['fas', 'arrow-left']"/> -->
                                     </div>
-                                    <div class="flex h-10 font-medium rounded-full bg-white shadow-md">
-                                        <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
-                                        <div v-for="n in totalPages" :key="n" v-if="Math.abs(n - currentPage) < 5 || n == totalPages || n == 1"
-                                            @click="!((currentPage>6&&n===currentPage-4&&n!==1&&n!==totalPages)||(n===currentPage+4&&n!==1&&n!==totalPages))&&changeCurrentPage(n)"
-                                            :class="{ 'bg-yellow-600 text-white': n === currentPage, 'hover:bg-gray-100': n !== currentPage, 'w-16 hover:bg-transparent': ((currentPage>6&&n===currentPage-4&&n!==1&&n!==totalPages)||(n===currentPage+4&&n!==1&&n!==totalPages))}"
-                                            class="min-w-max w-10 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full select-none text-sm"
-                                        >
-                                            <span v-if="(currentPage>6&&n===currentPage-4&&n!==1&&n!==totalPages)">
-                                                <form @submit.prevent="changeCurrentPage(parseInt(inputDestinationPageLeft))">
-                                                    <input
-                                                        class="inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent"
-                                                        :min="1"
-                                                        :max="currentPage-1"
-                                                        type="number"
-                                                        v-model="inputDestinationPageLeft"
-                                                        placeholder="..."
-                                                    />
-                                                </form>
-                                            </span>
-                                            <span v-else-if="(n===currentPage+4&&n!==1&&n!==totalPages)">
-                                                <form @submit.prevent="changeCurrentPage(parseInt(inputDestinationPageRight))">
-                                                    <input
-                                                        class="inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent"
-                                                        :min="currentPage+1"
-                                                        :max="totalPages"
-                                                        type="number"
-                                                        v-model="inputDestinationPageRight"
-                                                        placeholder="..."
-                                                    />
-                                                </form>
-                                            </span>
-                                            <span v-else>{{n}}</span>
+                                    <div class="flex font-medium rounded-full bg-white shadow-md">
+                                        <div v-for="n in totalPages" :key="n">
+                                            <div v-if="Math.abs(n - currentPage) < 4 || n == totalPages || n == 1"
+                                                @click="!((currentPage>=5&&n===currentPage-3&&n!==1&&n!==totalPages)||(n===currentPage+3&&n!==1&&n!==totalPages))&&changeCurrentPage(n)"
+                                                :class="{ 'bg-yellow-600 text-white': n === currentPage, 'hover:bg-gray-100': n !== currentPage, 'w-16 hover:bg-transparent': ((currentPage>=5&&n===currentPage-3&&n!==1&&n!==totalPages)||(n===currentPage+3&&n!==1&&n!==totalPages))}"
+                                                class="min-w-max w-10 h-10 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full select-none text-sm"
+                                            >
+                                                <span v-if="(currentPage>=5&&n===currentPage-3&&n!==1&&n!==totalPages)">
+                                                    <form @submit.prevent="changeCurrentPage(parseInt(inputDestinationPageLeft))">
+                                                        <input
+                                                            class="inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent"
+                                                            :min="1"
+                                                            :max="currentPage-1"
+                                                            type="number"
+                                                            v-model="inputDestinationPageLeft"
+                                                            placeholder="..."
+                                                        />
+                                                    </form>
+                                                </span>
+                                                <span v-else-if="(n===currentPage+3&&n!==1&&n!==totalPages)">
+                                                    <form @submit.prevent="changeCurrentPage(parseInt(inputDestinationPageRight))">
+                                                        <input
+                                                            class="inputDestinationPage h-10 w-full focus:ring-blue-500 focus:border-blue-500 hover:border-blue-500 text-center rounded-full border-transparent"
+                                                            :min="currentPage+1"
+                                                            :max="totalPages"
+                                                            type="number"
+                                                            v-model="inputDestinationPageRight"
+                                                            placeholder="..."
+                                                        />
+                                                    </form>
+                                                </span>
+                                                <span v-else>{{n}}</span>
+                                            </div>
                                         </div>
                                         <div class="min-w-max w-10 h-10 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-yellow-600 text-white select-none">{{currentPage}}/{{totalPages}}</div>
                                     </div>
@@ -532,10 +582,10 @@
             FilteredCompany: function() {
                 return this.companies.filter(company => {
                     return (
-                        company.nama_perusahaan.match(this.search) ||
-                        company.pic.match(this.search) ||
-                        company.telepon.toString().match(this.search) ||
-                        company.email.match(this.search)
+                        company.nama_perusahaan.toUpperCase().match(this.search.toUpperCase()) ||
+                        company.pic.toUpperCase().match(this.search.toUpperCase()) ||
+                        company.telepon.toString().toUpperCase().match(this.search.toUpperCase()) ||
+                        company.email.toUpperCase().match(this.search.toUpperCase())
                     );
                 });
             },
