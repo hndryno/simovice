@@ -14092,6 +14092,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14192,7 +14200,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (res.status == 201) {
                   Toast.fire({
                     icon: 'success',
-                    title: res.data
+                    iconColor: '#65A30D',
+                    title: res.data,
+                    showConfirmButton: false
                   });
                   Fire.$emit('addSuccess');
                   _this2.isShowModalAdd = !_this2.isShowModalAdd;
@@ -14224,7 +14234,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (res.status == 200) {
                   Toast.fire({
                     icon: 'success',
-                    title: res.data
+                    iconColor: '#0284C7',
+                    title: res.data,
+                    showConfirmButton: false
                   });
                   Fire.$emit('editSuccess');
                   _this3.isShowModalEdit = !_this3.isShowModalEdit;
@@ -14249,17 +14261,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: "Data yang dihapus tidak bisa dikembalikan!",
                   // type: "warning",
                   showCancelButton: true,
-                  confirmButtonColor: "#3085d6",
-                  cancelButtonColor: "#d33",
+                  confirmButtonColor: "#DB2777",
+                  cancelButtonColor: "#0D9488",
                   confirmButtonText: "Ya, hapus saja!"
                 }).then(function (result) {
                   if (result.value) {
                     axios["delete"]("/api/company/" + c).then(function () {
-                      Toast.fire("Menghapus!", "File anda telah terhapus", "success");
+                      Toast.fire({
+                        icon: 'success',
+                        iconColor: '#DB2777',
+                        title: "Menghapus! File anda telah terhapus",
+                        showConfirmButton: false
+                      });
                       Fire.$emit("deleteSuccess");
                     })["catch"](function (err) {
                       console.log(err);
-                      Toast.fire("Gagal!", "Ada sesuatu yang salah.", "warning");
+                      Toast.fire({
+                        icon: 'warning',
+                        iconColor: '#D97706',
+                        title: "Gagal! Ada sesuatu yang salah.",
+                        showConfirmButton: false
+                      });
                     });
                   }
                 });
@@ -17225,7 +17247,6 @@ var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/di
 
 window.Toast = Swal.mixin({
   toast: true,
-  //   position: 'top-end',
   position: 'top-right',
   timer: 3000,
   timerProgressBar: true
@@ -17317,7 +17338,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chrome, Safari, Edge, Opera */\n.inputDestinationPage[data-v-66e000f3]::-webkit-outer-spin-button,\n.inputDestinationPage[data-v-66e000f3]::-webkit-inner-spin-button {\n-webkit-appearance: none;\nmargin: 0;\n}\n/* Firefox */\n.inputDestinationPage[type=number][data-v-66e000f3] {\n-moz-appearance: textfield;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chrome, Safari, Edge, Opera */\n.inputDestinationPage[data-v-66e000f3]::-webkit-outer-spin-button,\n.inputDestinationPage[data-v-66e000f3]::-webkit-inner-spin-button {\n-webkit-appearance: none;\nmargin: 0;\n}\n/* Firefox */\n.inputDestinationPage[type=number][data-v-66e000f3] {\n-moz-appearance: textfield;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70923,7 +70944,7 @@ var render = function() {
                                     "ul",
                                     {
                                       staticClass:
-                                        "absolute inset-x-0 top-4 pt-6 hidden group-hover:block text-gray-700"
+                                        "z-10 absolute inset-x-0 top-4 pt-6 hidden group-hover:block text-gray-700"
                                     },
                                     [
                                       _c(
@@ -71006,7 +71027,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              "h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200",
+                              "h-10 w-full sm:rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-none",
                             attrs: {
                               type: "text",
                               placeholder: "Cari Perusahaan .."
@@ -71034,7 +71055,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:rounded-lg",
+                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-md font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:rounded-lg",
                                 attrs: { type: "button" }
                               },
                               [
@@ -71049,7 +71070,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:rounded-lg",
+                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-md  font-bold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:rounded-lg",
                                 attrs: { type: "button" }
                               },
                               [
@@ -71064,7 +71085,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg",
+                                  "inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-md  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg",
                                 attrs: { type: "button" },
                                 on: { click: _vm.toggleModalAdd }
                               },
@@ -71087,7 +71108,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "bg-white overflow-hidden shadow-lg sm:rounded-lg" },
+            {
+              staticClass:
+                "relative bg-white overflow-hidden shadow-lg sm:rounded-lg"
+            },
             [
               _c("div", { staticClass: "flex flex-col" }, [
                 _c(
@@ -71115,7 +71139,7 @@ var render = function() {
                                   "min-w-full divide-y divide-gray-200"
                               },
                               [
-                                _c("thead", { staticClass: "bg-gray-50" }, [
+                                _c("thead", { staticClass: " bg-gray-50" }, [
                                   _c("tr", [
                                     _c(
                                       "th",
@@ -71399,7 +71423,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "pr-24 select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" },
                                         on: {
                                           click: function($event) {
@@ -71457,7 +71481,7 @@ var render = function() {
                                       "th",
                                       {
                                         staticClass:
-                                          "select-none whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                          "absolute right-0 bg-gray-50 w-24 border-l select-none whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                         attrs: { scope: "col" }
                                       },
                                       [
@@ -71652,7 +71676,7 @@ var render = function() {
                                             "td",
                                             {
                                               staticClass:
-                                                "px-4 py-3 whitespace-nowrap"
+                                                "absolute right-0 bg-white pt- mt-1 border-l flex justify-center w-24 whitespace-nowrap"
                                             },
                                             [
                                               _c(
@@ -71813,7 +71837,7 @@ var render = function() {
                               "ul",
                               {
                                 staticClass:
-                                  "absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700"
+                                  "z-10 absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700"
                               },
                               [
                                 _c(

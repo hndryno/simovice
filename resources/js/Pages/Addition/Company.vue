@@ -30,7 +30,7 @@
                                             </div>
                                         </div>
                                         <div class="group inline-block relative">
-                                            <ul class="absolute inset-x-0 top-4 pt-6 hidden group-hover:block text-gray-700">
+                                            <ul class="z-10 absolute inset-x-0 top-4 pt-6 hidden group-hover:block text-gray-700">
                                                 <div class="shadow-lg rounded-full">
                                                     <li v-for="(item,index) in itemsPerPageList" :key="index">
                                                         <button @click="changeItemsPerPage(item.value)" :class="{'bg-gray-100': itemsPerPage===item.value, 'rounded-t-full': index===0, 'rounded-b-full': index===itemsPerPageList.length-1}" class="bg-white hover:bg-gray-50 block w-full py-1 text-sm focus:outline-none">{{item.label}}</button>
@@ -47,7 +47,7 @@
 
                                 <div class="flex-grow ml-4 md:mx-4">
                                     <input
-                                        class="h-10 w-full sm:rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200"
+                                        class="h-10 w-full sm:rounded-lg shadow-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-none"
                                         type="text"
                                         v-model="search"
                                         placeholder="Cari Perusahaan .."
@@ -55,13 +55,13 @@
                                 </div>
 
                                 <div class="flex-grow md:flex-grow-0 flex justify-end gap-4">
-                                    <button type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:rounded-lg">
+                                    <button type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-md font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:rounded-lg">
                                         <font-awesome-icon :icon="['fas', 'file-export']" />
                                     </button>
-                                    <button type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:rounded-lg">
+                                    <button type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-md  font-bold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:rounded-lg">
                                         <font-awesome-icon :icon="['fas', 'print']" />
                                     </button>
-                                    <button @click="toggleModalAdd" type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-sm  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg">
+                                    <button @click="toggleModalAdd" type="button" class="inline-flex justify-center items-center h-10 w-10 border border-transparent shadow-md  font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:rounded-lg">
                                         <font-awesome-icon :icon="['fas', 'plus']" />
                                     </button>
                                 </div>
@@ -71,7 +71,7 @@
                     </div>
 
                 </div>
-                <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
+                <div class="relative bg-white overflow-hidden shadow-lg sm:rounded-lg">
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -79,7 +79,7 @@
 
                                     <table class="min-w-full divide-y divide-gray-200">
 
-                                        <thead class="bg-gray-50">
+                                        <thead class=" bg-gray-50">
                                             <tr>
                                                 <th @click="sort('nama_perusahaan')" scope="col" class="select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Nama Perusahaan
@@ -97,7 +97,6 @@
                                                         }"
                                                         class="text-transparent group-hover:text-gray-300"
                                                     />
-                                                    <!-- debug: {{currentSortDir}}; -->
                                                 </th>
                                                 <th @click="sort('pic')" scope="col" class="select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Pic
@@ -167,7 +166,10 @@
                                                         class="text-transparent group-hover:text-gray-300"
                                                     />
                                                 </th>
-                                                <th @click="sort('updated_at')" scope="col" class="select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <!-- BEFORE FREEZE COLUMN -->
+                                                <!-- <th @click="sort('updated_at')" scope="col" class="select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> -->
+                                                <!-- END BEFORE FREEZE COLUMN -->
+                                                <th @click="sort('updated_at')" scope="col" class="pr-24 select-none group whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Tanggal Diedit
                                                     <font-awesome-icon :icon="['fas', 'sort-amount-up']"
                                                         :class="{
@@ -184,7 +186,10 @@
                                                         class="text-transparent group-hover:text-gray-300"
                                                     />
                                                 </th>
-                                                <th scope="col" class="select-none whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <!-- BEFORE FREEZE COLUMN -->
+                                                <!-- <th scope="col" class="w-24 select-none whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> -->
+                                                <!-- END BEFORE FREEZE COLUMN -->
+                                                <th scope="col" class="absolute right-0 bg-gray-50 w-24 border-l select-none whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Aksi
                                                 </th>
                                             </tr>
@@ -222,7 +227,10 @@
                                                         {{convertUnixTS(c.updated_at)}}
                                                     </span>
                                                 </td>
-                                                <td class="px-4 py-3 whitespace-nowrap">
+                                                <!-- BEFORE FREEZE COLUMN -->
+                                                <!-- <td class="px-4 py-3 whitespace-nowrap"> -->
+                                                <!-- END BEFORE FREEZE COLUMN -->
+                                                <td class="absolute right-0 bg-white pt- mt-1 border-l flex justify-center w-24 whitespace-nowrap">
                                                     <div class="inline-flex">
                                                         <button @click="toggleModalEdit(c)" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded-l">
                                                             <font-awesome-icon :icon="['fas', 'paint-brush']" />
@@ -263,7 +271,7 @@
 
                             <div class="grid grid-flow-col auto-cols-max md:auto-cols-min gap-4">
                                 <div class="group inline-block relative">
-                                    <ul class="absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700">
+                                    <ul class="z-10 absolute inset-x-0 -top-28 pb-10 hidden group-hover:block text-gray-700">
                                         <div class="shadow-lg rounded-full">
                                             <li v-for="(item,index) in itemsPerPageList" :key="index">
                                                 <button @click="changeItemsPerPage(item.value)" :class="{'bg-gray-100': itemsPerPage===item.value, 'rounded-t-full': index===0, 'rounded-b-full': index===itemsPerPageList.length-1}" class="bg-white hover:bg-gray-50 block w-full py-1 text-sm focus:outline-none">{{item.label}}</button>
@@ -490,7 +498,9 @@
                 if(res.status == 201){
                     Toast.fire({
                         icon: 'success',
-                        title: res.data
+                        iconColor: '#65A30D',
+                        title: res.data,
+                        showConfirmButton: false,
                     })
                     Fire.$emit('addSuccess')
                     this.isShowModalAdd = !this.isShowModalAdd
@@ -501,7 +511,9 @@
                 if(res.status == 200){
                     Toast.fire({
                         icon: 'success',
-                        title: res.data
+                        iconColor: '#0284C7',
+                        title: res.data,
+                        showConfirmButton: false,
                     })
                     Fire.$emit('editSuccess')
                     this.isShowModalEdit = !this.isShowModalEdit
@@ -514,20 +526,30 @@
                     text: "Data yang dihapus tidak bisa dikembalikan!",
                     // type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, hapus saja!"
+                    confirmButtonColor: "#DB2777",
+                    cancelButtonColor: "#0D9488",
+                    confirmButtonText: "Ya, hapus saja!",
                     })
                     .then(result => {
                     if (result.value) {
                         axios.delete("/api/company/" + c)
                         .then(() => {
-                            Toast.fire("Menghapus!", "File anda telah terhapus", "success");
+                            Toast.fire({
+                                icon: 'success',
+                                iconColor: '#DB2777',
+                                title: "Menghapus! File anda telah terhapus",
+                                showConfirmButton: false,
+                            })
                             Fire.$emit("deleteSuccess");
                         })
                         .catch((err) => {
                             console.log(err)
-                            Toast.fire("Gagal!", "Ada sesuatu yang salah.", "warning");
+                            Toast.fire({
+                                icon: 'warning',
+                                iconColor: '#D97706',
+                                title: "Gagal! Ada sesuatu yang salah.",
+                                showConfirmButton: false,
+                            })
                         });
                     }
                 });
