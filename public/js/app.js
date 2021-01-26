@@ -14145,9 +14145,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    toggleColorPicker: function toggleColorPicker() {
-      this.isOpenColorPicker = !this.isOpenColorPicker;
-    },
     toggleModalAdd: function toggleModalAdd() {
       this.company.reset();
       this.isShowModalAdd = !this.isShowModalAdd;
@@ -14348,7 +14345,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return this.companies.filter(function (company) {
-        return company.nama_perusahaan.toUpperCase().match(_this5.search.toUpperCase()) || company.pic.toUpperCase().match(_this5.search.toUpperCase()) || company.telepon.toString().toUpperCase().match(_this5.search.toUpperCase()) || company.email.toUpperCase().match(_this5.search.toUpperCase());
+        return company.nama_perusahaan.match(_this5.search) // company.pic.match(this.search) ||
+        // company.telepon.toString().match(this.search) ||
+        // company.email.match(this.search)
+        ;
       });
     },
     SortedCompany: function SortedCompany() {

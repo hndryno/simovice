@@ -471,9 +471,6 @@
             }
         },
         methods: {
-            toggleColorPicker(){
-                this.isOpenColorPicker = !this.isOpenColorPicker
-            },
             toggleModalAdd(){
                 this.company.reset();
                 this.isShowModalAdd = !this.isShowModalAdd
@@ -604,10 +601,10 @@
             FilteredCompany: function() {
                 return this.companies.filter(company => {
                     return (
-                        company.nama_perusahaan.toUpperCase().match(this.search.toUpperCase()) ||
-                        company.pic.toUpperCase().match(this.search.toUpperCase()) ||
-                        company.telepon.toString().toUpperCase().match(this.search.toUpperCase()) ||
-                        company.email.toUpperCase().match(this.search.toUpperCase())
+                        company.nama_perusahaan.match(this.search)
+                        // company.pic.match(this.search) ||
+                        // company.telepon.toString().match(this.search) ||
+                        // company.email.match(this.search)
                     );
                 });
             },
