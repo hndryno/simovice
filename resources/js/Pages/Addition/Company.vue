@@ -2,9 +2,10 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Category
+                List Perusahaan
             </h2>
         </template>
+
         <div class="pt-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-12 gap-4 py-4 items-center">
@@ -38,7 +39,7 @@
                                                 </div>
                                             </ul>
                                             <button class="group-hover:text-gray-500 min-w-max w-10 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center select-none">
-                                                {{itemsPerPage}}&nbsp;<font-awesome-icon class="group-hover:transform group-hover:rotate-90" :icon="['fas', 'caret-right']" />
+                                                {{itemsPerPage===companies.length?'All':itemsPerPage}}&nbsp;<font-awesome-icon class="group-hover:transform group-hover:rotate-90" :icon="['fas', 'caret-right']" />
                                             </button>
                                         </div>
                                     </div>
@@ -245,7 +246,7 @@
 
                                         <tbody class="bg-white divide-y divide-gray-200" v-if="companies.length == 0">
                                             <tr>
-                                                <td class="text-center text-xs px-6 py-4 whitespace-nowrap" colspan="12">
+                                                <td class="text-sm px-6 py-4 whitespace-nowrap" colspan="12">
                                                     Data kosong
                                                 </td>
                                             </tr>
@@ -253,7 +254,7 @@
 
                                         <tbody class="bg-white divide-y divide-gray-200" v-if="companies.length && SortedCompany.length == 0">
                                             <tr>
-                                                <td class="text-center text-xs px-6 py-4 whitespace-nowrap" colspan="12">
+                                                <td class="text-sm px-6 py-4 whitespace-nowrap" colspan="12">
                                                     Data tidak ditemukan
                                                 </td>
                                             </tr>
@@ -279,7 +280,7 @@
                                         </div>
                                     </ul>
                                     <button class="group-hover:text-gray-500  min-w-max w-10 h-10 px-2 bg-white text-gray-700 text-sm rounded-full shadow-md inline-flex items-center justify-center select-none">
-                                        <font-awesome-icon class="group-hover:transform group-hover:rotate-90" :icon="['fas', 'caret-left']" />&nbsp;{{itemsPerPage}}
+                                        <font-awesome-icon class="group-hover:transform group-hover:rotate-90" :icon="['fas', 'caret-left']" />&nbsp;{{itemsPerPage===companies.length?'All':itemsPerPage}}
                                     </button>
                                 </div>
                                 <div class="flex">
@@ -362,15 +363,15 @@
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="pic" class="block text-sm font-medium text-gray-700">Pic</label>
-                                        <input type="text" v-model="company.pic" name="pic" id="nama_perusahaan" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input type="text" v-model="company.pic" name="pic" id="pic" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="telepon" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
-                                        <input type="text" v-model="company.telepon" name="telepon" id="nama_perusahaan" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input type="text" v-model="company.telepon" name="telepon" id="telepon" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                        <input type="text" v-model="company.email" name="email" id="nama_perusahaan" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input type="text" v-model="company.email" name="email" id="email" class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -381,15 +382,15 @@
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="pic" class="block text-sm font-medium text-gray-700">Pic</label>
-                                        <input type="text" v-model="company.pic" name="pic" id="nama_perusahaan" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input type="text" v-model="company.pic" name="pic" id="pic" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="telepon" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
-                                        <input type="text" v-model="company.telepon" name="telepon" id="nama_perusahaan" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input type="text" v-model="company.telepon" name="telepon" id="telepon" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                        <input type="text" v-model="company.email" name="email" id="nama_perusahaan" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <input type="text" v-model="company.email" name="email" id="email" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                             </div>
@@ -461,12 +462,6 @@
                 currentSort:'nama_perusahaan',
                 currentSortDir:'asc',
                 itemsPerPage:10,
-                itemsPerPageList:[
-                    { value: 10, label: '10' },
-                    { value: 15, label: '15' },
-                    { value: 20, label: '20' },
-                    { value: 25, label: '25' },
-                ],
                 currentPage:1,
             }
         },
@@ -540,7 +535,6 @@
                             Fire.$emit("deleteSuccess");
                         })
                         .catch((err) => {
-                            console.log(err)
                             Toast.fire({
                                 icon: 'warning',
                                 iconColor: '#D97706',
@@ -597,6 +591,14 @@
         computed: {
             totalPages: function(){
                 return Math.ceil(this.FilteredCompany.length / this.itemsPerPage)
+            },
+            itemsPerPageList: function(){
+                return [
+                    { value: 5, label: '5' },
+                    { value: 10, label: '10' },
+                    { value: 25, label: '25' },
+                    { value: this.companies.length, label: 'All' },
+                ]
             },
             FilteredCompany: function() {
                 return this.companies.filter(company => {
