@@ -34,10 +34,9 @@ Vue.component(AlertError.name, AlertError);
 const Swal = require('sweetalert2').default;
 window.Toast = Swal.mixin({
   toast: true,
-//   position: 'top-end',
   position: 'top-right',
   timer: 3000,
-  timerProgressBar: true
+  timerProgressBar: true,
 })
 
 window.Fire = new Vue()
@@ -59,6 +58,9 @@ Vue.mixin({
     convertUnixTS(date){
       moment.locale("id");
       return moment(date, "YYYY-MM-DD").format("D MMMM YYYY");
+    },
+    dateInputFormat(date){
+        return moment(date).format("YYYY-MM-DD");
     },
     convertBoolean(bool){
       if(bool == 1){

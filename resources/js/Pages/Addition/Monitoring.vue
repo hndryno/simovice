@@ -5,159 +5,331 @@
                 Monitoring
             </h2>
         </template>
-    
+
         <div class="py-12">
-             
-            <div class="md:container md:mx-auto">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form @submit.prevent="searchVo">
-                        <div class="input-group col-md-10">
-                            <input class="form-control" type="search" placeholder="Masukan Kode Virtual Office" id="example-search-input" v-model="search">
-                            <span class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    Cari Data
-                                </button>
-                            </span>
-                        </div>
-                        </form>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="grid grid-cols-12 gap-4">
 
-                        <div class="py-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    Data Perusahaan
+                    <div class="col-span-4">
+                        <div class="grid grid-cols-6 gap-4 items-center">
+                            <div class="col-span-6">
+                                <form class="flex shadow-lg sm:rounded-lg" @submit.prevent="searchVo">
+                                    <input
+                                        class="h-10 w-full sm:rounded-l-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-200"
+                                        type="text"
+                                        v-model="search"
+                                        placeholder="Cari Virtual Office .."
+                                    />
+                                    <button class="h-10 px-2 sm:rounded-r-lg bg-blue-500 border-gray-200 border-t border-b border-r whitespace-nowrap text-white focus:outline-none" type="submit">
+                                        <font-awesome-icon :icon="['fas', 'search']" />&nbsp;Cari
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-span-6">
+                                <!-- <div class="max-w-full" v-if="company.hasOwnProperty('id')">
+                                    <div class="bg-white shadow-lg rounded-lg py-3">
+                                        <div class="py-2 px-10">
+                                            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">Data Perusahan</h3>
+                                            <div class="text-center text-gray-400 text-xs font-semibold">
+                                                <p>menampilkan data perusahan</p>
+                                            </div>
+                                            <table class="text-xs my-3">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Nama Perusahaan</td>
+                                                        <td class="px-2 py-2">{{company.company.nama_perusahaan}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Person in Charge</td>
+                                                        <td class="px-2 py-2">{{company.company.pic}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Telepone</td>
+                                                        <td class="px-2 py-2">{{company.company.telepon}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
+                                                        <td class="px-2 py-2">{{company.company.email}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="card-body" v-if="company.hasOwnProperty('id')">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><b>Nama Perusahaan : </b>{{company.company.nama_perusahaan}}</li>
-                                        <li class="list-group-item"><b>PIC : </b>{{company.company.pic}} </li>
-                                        <li class="list-group-item"><b>Telepon :</b>{{company.company.telepon}} </li>
-                                        <li class="list-group-item"><b>Email : </b>{{company.company.email}} </li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-body" v-else>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><b>Nama Perusahaan : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>PIC : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Telepon : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Email : </b>Data Kosong</li>
-                                    </ul>
+                                <div class="max-w-full" v-else>
+                                    <div class="bg-white shadow-lg rounded-lg py-3">
+                                        <div class="py-2 px-10">
+                                            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">Data Perusahan</h3>
+                                            <div class="text-center text-gray-400 text-xs font-semibold">
+                                                <p>menampilkan data perusahan</p>
+                                            </div>
+                                            <table class="text-xs my-3">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Nama Perusahaan</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Person in Charge</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Telepone</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="max-w-full">
+                                    <div class="bg-white shadow-lg rounded-lg py-3">
+                                        <div class="py-2 px-10">
+                                            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">Data Perusahan</h3>
+                                            <div class="text-center text-gray-400 text-xs font-semibold">
+                                                <p>menampilkan data perusahan</p>
+                                            </div>
+                                            <table class="text-xs my-3" v-if="company.hasOwnProperty('company')">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Nama Perusahaan</td>
+                                                        <td class="px-2 py-2">{{company.company.nama_perusahaan}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Person in Charge</td>
+                                                        <td class="px-2 py-2">{{company.company.pic}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Telepone</td>
+                                                        <td class="px-2 py-2">{{company.company.telepon}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
+                                                        <td class="px-2 py-2">{{company.company.email}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="mt-3 bg-red-400 text-white rounded-xl text-center font-bold" v-else>
+                                                data tidak tersedia
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div class="col-span-6">
+                                <!-- <div class="max-w-full" v-if="company.hasOwnProperty('id')">
+                                    <div class="bg-white shadow-lg rounded-lg py-3">
+                                        <div class="py-2 px-10">
+                                            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">Virtual Office</h3>
+                                            <div class="text-center text-gray-400 text-xs font-semibold">
+                                                <p>menampilkan data virtual office</p>
+                                            </div>
+                                            <table class="text-xs my-3">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Harga Virtual Office</td>
+                                                        <td class="px-2 py-2">{{company.harga_vo}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Tanggal Aggrement</td>
+                                                        <td class="px-2 py-2">{{company.tanggal_aggrement}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Tanggal Selesai</td>
+                                                        <td class="px-2 py-2">{{company.tanggal_selesai}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Meeting Room</td>
+                                                        <td class="px-2 py-2">{{company.fasilitas_meeting_room}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Konsultasi Pajak</td>
+                                                        <td class="px-2 py-2">{{company.fasilitas_konsultasi_pajak}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Private Office</td>
+                                                        <td class="px-2 py-2">{{company.fasilitas_private_office}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Papan Nama Perusahaan</td>
+                                                        <td class="px-2 py-2">{{company.papan_nama_perusahaan}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="max-w-full" v-else>
+                                    <div class="bg-white shadow-lg rounded-lg py-3">
+                                        <div class="py-2 px-10">
+                                            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">Virtual Office</h3>
+                                            <div class="text-center text-gray-400 text-xs font-semibold">
+                                                <p>menampilkan data virtual office</p>
+                                            </div>
+                                            <table class="text-xs my-3">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Harga Virtual Office</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Tanggal Aggrement</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Tanggal Selesai</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Meeting Room</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Konsultasi Pajak</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Private Office</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Papan Nama Perusahaan</td>
+                                                        <td class="px-2 py-2">data tidak tersedia</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="max-w-full">
+                                    <div class="bg-white shadow-lg rounded-lg py-3">
+                                        <div class="py-2 px-10">
+                                            <h3 class="text-center text-xl text-gray-900 font-medium leading-8">Virtual Office</h3>
+                                            <div class="text-center text-gray-400 text-xs font-semibold">
+                                                <p>menampilkan data virtual office</p>
+                                            </div>
+                                            <table class="text-xs my-3" v-if="company.hasOwnProperty('id')">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Harga Virtual Office</td>
+                                                        <td class="px-2 py-2">{{company.harga_vo}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Tanggal Aggrement</td>
+                                                        <td class="px-2 py-2">{{company.tanggal_aggrement}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Tanggal Selesai</td>
+                                                        <td class="px-2 py-2">{{company.tanggal_selesai}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Meeting Room</td>
+                                                        <td class="px-2 py-2">{{company.fasilitas_meeting_room}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Konsultasi Pajak</td>
+                                                        <td class="px-2 py-2">{{company.fasilitas_konsultasi_pajak}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Fasilitas Private Office</td>
+                                                        <td class="px-2 py-2">{{company.fasilitas_private_office}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Papan Nama Perusahaan</td>
+                                                        <td class="px-2 py-2">{{company.papan_nama_perusahaan}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="mt-3 bg-red-400 text-white rounded-xl text-center font-bold" v-else>
+                                                data tidak tersedia
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                       
-                        <div class="card">
-                            
-                                <div class="card-header">
-                                    Virtual Office
-                                </div>
-
-                                <div class="card-body" v-if="company.hasOwnProperty('company')">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><b>Harga Vo : {{company.harga_vo}} </b></li>
-                                        <li class="list-group-item"><b>Tanggal Aggrement : {{company.tanggal_aggrement}} </b></li>
-                                        <li class="list-group-item"><b>Tanggal Selesai : </b>{{company.tanggal_selesai}}</li>
-                                        <li class="list-group-item"><b>Fasilitas Meeting Room : </b>{{company.fasilitas_konsultasi_pajak}}</li>
-                                        <li class="list-group-item"><b>Fasilitas Konsultasi Pajak : </b>{{company.fasilitas_private_office}}</li>
-                                        <li class="list-group-item"><b>Fasilitas Private Office : </b>{{company.fasilitas_private_office}}</li>
-                                        <li class="list-group-item"><b>Papan Nama Perusahaan : </b>{{company.papan_nama_perusahaan}}</li>
-
-                                    </ul>
-                                </div>
-
-                                 <div class="card-body" v-else>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><b>Harga Vo : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Tanggal Aggrement : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Tanggal Selesai : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Fasilitas Meeting Room : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Fasilitas Konsultasi Pajak : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Fasilitas Private Office : </b>Data Kosong</li>
-                                        <li class="list-group-item"><b>Papan Nama Perusahaan : </b>Data Kosong</li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        <div class="py-4"></div>
-
-
-                             <div class="">
+                    <div class="col-span-8">
+                        <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                             <div class="flex flex-col">
-                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                            <tr>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Jan
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Feb
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Mar
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Apr
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Mei
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Jun
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Jul
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Agu
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Sep
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Okt
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Nov
-                                                </th>
-                                                <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Des
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-gray-50">
-                                            <tr>
-                                                <td class="text-center px-6 py-4 whitespace-nowrap" colspan="12">
-                                                    Data kosong
-                                                </td>
-                                            </tr>
-                                                <!-- More items... -->
-                                        </tbody>
-                                </table>
+                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Jan
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Feb
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Mar
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Apr
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Mei
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Jun
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Jul
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Agu
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Sep
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Okt
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Nov
+                                                        </th>
+                                                        <th scope="col" class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Des
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody class="bg-white divide-y divide-gray-200">
+                                                    <tr>
+                                                        <td class="text-sm text-center py-4 whitespace-nowrap" colspan="12">
+                                                            <div class="bg-red-400 text-white rounded-xl text-center font-bold">
+                                                                data tidak tersedia
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
-                                </div>
-                             </div>
+                            </div>
                         </div>
                     </div>
 
-              </div>
+                </div>
             </div>
         </div>
-        
+
 
         <!-- </div> -->
     </app-layout>
 
-    
+
 </template>
 
 <script>
